@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 13. Services Category Filter (services.html)
     initServicesFilter();
+
+    // 14. 30-Second Legal Notice Popup
+    initLegalNoticePopup();
 });
 
 /* ==========================================================================
@@ -752,4 +755,54 @@ function initServicesFilter() {
             });
         });
     });
+}
+
+/* ==========================================================================
+   14. 30-SECOND LEGAL NOTICE POPUP
+   ========================================================================== */
+function initLegalNoticePopup() {
+    // Check if notice has been displayed in this session to prevent spamming
+    const isNoticeShown = sessionStorage.getItem('legalNoticeShown');
+    if (isNoticeShown === 'true') return;
+
+    setTimeout(() => {
+        // Create the element
+        const popupEl = document.createElement('div');
+        popupEl.className = 'legal-notice-popup';
+        popupEl.id = 'legalNoticePopup';
+        popupEl.innerHTML = `
+            <div class="legal-notice-content">
+                <button class="legal-notice-close" id="closeLegalNotice" aria-label="Close Notice"><i class="fa-solid fa-xmark"></i></button>
+                <div class="legal-notice-header">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <h3>Important Notice</h3>
+                </div>
+                <div class="legal-notice-body">
+                    <p>Under the Special Marriage Act, 1954, a mandatory <strong>30-day notice period</strong> is required after submitting your court marriage registration application. The certificate cannot be issued before the completion of this statutory period.</p>
+                </div>
+                <div class="legal-notice-footer">
+                    <button class="btn btn-primary btn-sm" id="acceptLegalNotice">Acknowledge</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(popupEl);
+
+        // Add class to trigger slide-in animation
+        setTimeout(() => {
+            popupEl.classList.add('open');
+        }, 100);
+
+        // Close handlers
+        const dismissNotice = () => {
+            popupEl.classList.remove('open');
+            setTimeout(() => {
+                popupEl.remove();
+            }, 400);
+            sessionStorage.setItem('legalNoticeShown', 'true');
+        };
+
+        document.getElementById('closeLegalNotice').addEventListener('click', dismissNotice);
+        document.getElementById('acceptLegalNotice').addEventListener('click', dismissNotice);
+    }, 30000); // 30 seconds delay
 }
