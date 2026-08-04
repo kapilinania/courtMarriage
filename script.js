@@ -18,13 +18,13 @@ const serviceData = {
         timeline: "Usually processed within 3 to 7 working days, depending on government office appointment slots.",
         benefits: "Official government proof of marriage, essential for applying for spouse visas, passports, joint bank accounts, and inheritance claims."
     },
-    "Arya Samaj Marriage": {
-        title: "Arya Samaj Ceremony & Registration",
-        description: "An Arya Samaj marriage is conducted according to Vedic rites. It is simple, fast, and highly cost-effective, applicable for Hindus, Buddhists, Sikhs, and Jains. Post-ceremony, we facilitate the mandatory government court registration to secure the official marriage certificate.",
-        eligibility: "Groom: 21+ Years, Bride: 18+ Years. Both parties must belong to religions under the Arya Samaj fold (or perform Shuddhi/conversion voluntary ceremony if applicable).",
-        documents: "Age proofs (10th mark sheet/birth certificate), ID proofs, 8 passport photos of each, and 2 witnesses with their ID cards.",
-        timeline: "Ceremony and local certificate issued in 1 day. Government court registration takes an additional 3-5 days.",
-        benefits: "Very fast solemnization, low cost, completely Vedic and sacred ritual, fully recognized legally once registered."
+    "Traditional Marriage": {
+        title: "Traditional Ceremony & Registration",
+        description: "A traditional wedding ceremony conducted according to personal religious rites (Hindu, Sikh, Buddhist, Jain temple rites). Post-ceremony, we facilitate the compulsory government registration to secure the official government marriage certificate.",
+        eligibility: "Groom: 21+ Years, Bride: 18+ Years. Rites must be performed traditionally by an authorized priest or temple.",
+        documents: "Age proofs (10th mark sheet/birth certificate), ID proofs, wedding photographs/invitation card, and 2 witnesses with their ID cards.",
+        timeline: "Ceremony and local temple certificate in 1 day. Government registration takes an additional 3-5 days.",
+        benefits: "Fast solemnization, respects traditional religious rituals, fully recognized legally once registered."
     },
     "Inter-Caste Marriage": {
         title: "Inter-Caste Marriage Guidance",
