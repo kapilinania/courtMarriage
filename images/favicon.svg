@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <circle cx="256" cy="256" r="240" fill="#0B3D91" />
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#D4AF37" stroke-width="12" />
+  <path d="M256 120v260M160 200h192" fill="none" stroke="#D4AF37" stroke-width="24" stroke-linecap="round" />
+  <!-- Left Pan -->
+  <path d="M160 200l-30 80h60z" fill="#D4AF37" stroke="#D4AF37" stroke-width="8" stroke-linejoin="round" />
+  <!-- Right Pan -->
+  <path d="M352 200l-30 80h60z" fill="#D4AF37" stroke="#D4AF37" stroke-width="8" stroke-linejoin="round" />
+  <!-- Base -->
+  <path d="M200 380h112" fill="none" stroke="#D4AF37" stroke-width="24" stroke-linecap="round" />
+</svg>
