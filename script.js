@@ -318,7 +318,7 @@ function initForms() {
 
             // Simulate Network Delay
             setTimeout(() => {
-                showFeedback(formFeedback, "Thank you! Your legal inquiry has been submitted. Advocate Baruah's team will contact you shortly.", true);
+                showFeedback(formFeedback, "Thank you! Your legal inquiry has been submitted. Advocate Khusboo Verma's team will contact you shortly.", true);
                 contactForm.reset();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
