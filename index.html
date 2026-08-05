@@ -98,6 +98,7 @@
                     <li><a href="index.html" class="nav-link active">Home</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
                     <li><a href="court-marriage-process.html" class="nav-link">Process</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
                     <li><a href="about-advocate.html" class="nav-link">About</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
@@ -131,6 +132,7 @@
             <li><a href="index.html" class="drawer-link active">Home</a></li>
             <li><a href="services.html" class="drawer-link">Services</a></li>
             <li><a href="court-marriage-process.html" class="drawer-link">Process</a></li>
+            <li><a href="gallery.html" class="drawer-link">Gallery</a></li>
             <li><a href="about-advocate.html" class="drawer-link">About</a></li>
             <li><a href="contact.html" class="drawer-link">Contact</a></li>
             <li><a href="forms/marriage_application_form.pdf" target="_blank" download class="drawer-link"><i class="fa-solid fa-file-pdf"></i> Download Forms</a></li>
@@ -587,6 +589,51 @@
             </div>
         </section>
 
+        <!-- Section 8.5: Interactive Photo Gallery -->
+        <section class="gallery-section bg-light" id="gallery">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Photo Gallery</span>
+                    <h2 class="section-title">Explore Our Practice &amp; Registration Gallery</h2>
+                    <p class="section-desc">Glimpse our legal consultations, solemnization ceremonies, chamber office, and certificate registrations.</p>
+                </div>
+
+                <!-- Gallery Category Filter Tabs -->
+                <div class="gallery-filter-tabs">
+                    <button class="gallery-tab active" data-filter="all">All Photos</button>
+                    <button class="gallery-tab" data-filter="court">Court Marriages</button>
+                    <button class="gallery-tab" data-filter="registration">Registrations</button>
+                    <button class="gallery-tab" data-filter="ceremonies">Ceremonies</button>
+                    <button class="gallery-tab" data-filter="chamber">Chamber &amp; Office</button>
+                </div>
+
+                <!-- Interactive Gallery Slider -->
+                <div class="gallery-slider-wrapper">
+                    <button class="gallery-arrow gallery-arrow-prev" id="galleryPrevBtn" aria-label="Previous Slide">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="gallery-slider-track-container">
+                        <div class="gallery-slider-track" id="galleryTrack">
+                            <!-- Dynamic Gallery Cards will render here -->
+                        </div>
+                    </div>
+                    <button class="gallery-arrow gallery-arrow-next" id="galleryNextBtn" aria-label="Next Slide">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Slider Pagination Indicators -->
+                <div class="gallery-pagination" id="galleryPagination"></div>
+
+                <!-- Load More / Rest Images Button -->
+                <div class="gallery-load-more text-center" style="margin-top: 35px;">
+                    <button class="btn btn-secondary btn-load-gallery" id="loadMoreGalleryBtn">
+                        <i class="fa-solid fa-layer-group"></i> <span>Load More Photos</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- Section 9: Client Reviews (Testimonials Slider) -->
         <section class="reviews-section" id="reviews">
             <div class="container">
@@ -925,6 +972,33 @@
             </div>
         </div>
         <div class="modal-overlay" id="serviceDetailOverlay"></div>
+    </div>
+
+    <!-- Fullscreen Interactive Lightbox Modal -->
+    <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+        <div class="lightbox-overlay" id="lightboxOverlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button class="lightbox-arrow lightbox-arrow-prev" id="lightboxPrevBtn" aria-label="Previous Image">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="lightbox-body">
+                <div class="lightbox-img-wrapper">
+                    <img src="" alt="" id="lightboxImg" class="lightbox-img">
+                </div>
+                <div class="lightbox-caption-box">
+                    <span class="lightbox-category" id="lightboxCategory">Category</span>
+                    <h3 id="lightboxTitle" class="lightbox-title">Image Title</h3>
+                    <p id="lightboxCaption" class="lightbox-caption">Description caption goes here.</p>
+                    <span class="lightbox-counter" id="lightboxCounter">1 / 8</span>
+                </div>
+            </div>
+            <button class="lightbox-arrow lightbox-arrow-next" id="lightboxNextBtn" aria-label="Next Image">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Script -->

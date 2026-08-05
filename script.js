@@ -108,11 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. Hero Tagline Text Rotator
     initTextRotator();
 
-    // 13. Services Category Filter (services.html)
+    // 13. Services Category Filter
     initServicesFilter();
 
     // 14. 30-Second Legal Notice Popup
     initLegalNoticePopup();
+
+    // 15. Interactive Gallery & Lightbox
+    initInteractiveGallery();
 });
 
 /* ==========================================================================
@@ -822,4 +825,317 @@ function initLegalNoticePopup() {
         document.getElementById('closeLegalNotice').addEventListener('click', dismissNotice);
         document.getElementById('acceptLegalNotice').addEventListener('click', dismissNotice);
     }, 30000); // 30 seconds delay
+}
+
+/* ==========================================
+   INTERACTIVE GALLERY & LIGHTBOX MODULE
+   ========================================== */
+function initInteractiveGallery() {
+    const galleryTrack = document.getElementById('galleryTrack');
+    const galleryPageGridTrack = document.getElementById('galleryPageGridTrack');
+    const galleryPagination = document.getElementById('galleryPagination');
+    const prevBtn = document.getElementById('galleryPrevBtn');
+    const nextBtn = document.getElementById('galleryNextBtn');
+    const loadMoreBtn = document.getElementById('loadMoreGalleryBtn');
+    
+    // Lightbox elements
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxCategory = document.getElementById('lightboxCategory');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxPrev = document.getElementById('lightboxPrevBtn');
+    const lightboxNext = document.getElementById('lightboxNextBtn');
+
+    if (!galleryTrack && !galleryPageGridTrack) return;
+
+    // Gallery Data Source (easily updateable array)
+    const galleryData = [
+        { id: 1, title: "Registration Desk Solemnization", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_1.jpg", caption: "Couples signing official court marriage register in Guwahati advocate chamber." },
+        { id: 2, title: "Government Marriage Certificate", category: "registration", categoryLabel: "Registration", image: "images/gallery_2.jpg", caption: "Joyful couple holding their legally issued court marriage registration certificate." },
+        { id: 3, title: "Legal Advice Consultation", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_3.jpg", caption: "Advocate Khusboo Verma explaining registration procedures to clients." },
+        { id: 4, title: "Traditional Garland Exchange", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_4.jpg", caption: "Sacred garland exchange ritual before solemnizing marriage registration." },
+        { id: 5, title: "Official Stamp & Document Signing", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_5.jpg", caption: "Handing over wedding rings and signing official government affidavits." },
+        { id: 6, title: "Guwahati Office & Witness Gathering", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_6.jpg", caption: "Happy family and witnesses gathered at Guwahati court marriage office." },
+        { id: 7, title: "Traditional Marriage Blessings", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_7.jpg", caption: "Traditional Assamese ritual blessing ceremony for legal marriage." },
+        { id: 8, title: "Official Legal Seal & Agreement", category: "registration", categoryLabel: "Registration", image: "images/gallery_8.jpg", caption: "Official government stamp seal placed on final court marriage registration." },
+        { id: 9, title: "Sacred Vow Rituals", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_9.jpg", caption: "Couples exchanging legal vows and traditional garlands in Guwahati." },
+        { id: 10, title: "Document Review & Drafting", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_10.jpg", caption: "Detailed legal verification of witness IDs and marriage application notices." },
+        { id: 11, title: "Court Appearance & Approval", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_11.jpg", caption: "Couples celebrating successful court appearance and marriage authorization." },
+        { id: 12, title: "Official Registration Seal", category: "registration", categoryLabel: "Registration", image: "images/gallery_12.jpg", caption: "Certified legal registrar seal affixed to government marriage certificate." }
+    ];
+
+    let currentFilter = 'all';
+    let isExpanded = false;
+    let currentSlide = 0;
+    let activeLightboxIndex = 0;
+    let filteredItems = [...galleryData];
+
+    // Helper: get items per view based on viewport width
+    function getItemsPerView() {
+        if (window.innerWidth <= 600) return 1;
+        if (window.innerWidth <= 992) return 2;
+        return 3;
+    }
+
+    // Render Gallery
+    function renderGallery() {
+        filteredItems = galleryData.filter(item => currentFilter === 'all' || item.category === currentFilter);
+
+        // 1. Render Home Page Slider if element exists
+        if (galleryTrack) {
+            const displayLimit = isExpanded ? filteredItems.length : Math.min(6, filteredItems.length);
+            const visibleItems = filteredItems.slice(0, displayLimit);
+
+            galleryTrack.innerHTML = visibleItems.map((item, idx) => `
+                <div class="gallery-card" data-index="${idx}" data-id="${item.id}">
+                    <div class="gallery-img-box">
+                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-icon">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <div>
+                            <span class="gallery-badge">${item.categoryLabel}</span>
+                            <h4>${item.title}</h4>
+                            <p>${item.caption}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (loadMoreBtn) {
+                if (filteredItems.length <= 6) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'inline-flex';
+                    if (isExpanded) {
+                        loadMoreBtn.innerHTML = `<i class="fa-solid fa-compress"></i> <span>Show Fewer Photos</span>`;
+                    } else {
+                        loadMoreBtn.innerHTML = `<i class="fa-solid fa-layer-group"></i> <span>Load More Photos (${filteredItems.length - 6} More)</span>`;
+                    }
+                }
+            }
+
+            currentSlide = 0;
+            updateSliderPosition();
+            renderPagination(visibleItems.length);
+        }
+
+        // 2. Render Dedicated Gallery Page Grid if element exists
+        if (galleryPageGridTrack) {
+            galleryPageGridTrack.innerHTML = filteredItems.map((item, idx) => `
+                <div class="gallery-grid-item" data-index="${idx}">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    <div class="gallery-grid-overlay">
+                        <span class="gallery-grid-badge">${item.categoryLabel}</span>
+                        <div class="gallery-grid-zoom">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </div>
+                        <p class="gallery-grid-caption">${item.title}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        attachCardClickEvents();
+    }
+
+    // Update Slider Track Transform (Home Page)
+    function updateSliderPosition() {
+        if (!galleryTrack) return;
+        const itemsPerView = getItemsPerView();
+        const totalCards = galleryTrack.children.length;
+        const maxSlide = Math.max(0, totalCards - itemsPerView);
+
+        if (currentSlide > maxSlide) currentSlide = maxSlide;
+        if (currentSlide < 0) currentSlide = 0;
+
+        const cardWidthPercent = 100 / itemsPerView;
+        const movePercent = currentSlide * cardWidthPercent;
+        galleryTrack.style.transform = `translateX(-${movePercent}%)`;
+
+        if (prevBtn) prevBtn.classList.toggle('disabled', currentSlide === 0);
+        if (nextBtn) nextBtn.classList.toggle('disabled', currentSlide >= maxSlide);
+
+        updatePaginationDots();
+    }
+
+    // Render Pagination Dots
+    function renderPagination(itemCount) {
+        if (!galleryPagination) return;
+        const itemsPerView = getItemsPerView();
+        const totalPages = Math.max(1, itemCount - itemsPerView + 1);
+
+        if (totalPages <= 1) {
+            galleryPagination.style.display = 'none';
+            return;
+        }
+
+        galleryPagination.style.display = 'flex';
+        galleryPagination.innerHTML = Array.from({ length: totalPages }, (_, i) => `
+            <span class="gallery-dot ${i === currentSlide ? 'active' : ''}" data-slide="${i}"></span>
+        `).join('');
+
+        galleryPagination.querySelectorAll('.gallery-dot').forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentSlide = parseInt(e.target.dataset.slide, 10);
+                updateSliderPosition();
+            });
+        });
+    }
+
+    function updatePaginationDots() {
+        if (!galleryPagination) return;
+        galleryPagination.querySelectorAll('.gallery-dot').forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === currentSlide);
+        });
+    }
+
+    // Attach Card Click Events for Lightbox
+    function attachCardClickEvents() {
+        const cards = document.querySelectorAll('.gallery-card, .gallery-grid-item');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const idx = parseInt(card.dataset.index, 10);
+                openLightbox(idx);
+            });
+        });
+    }
+
+    // Filter Tabs Click Events
+    const filterTabs = document.querySelectorAll('.gallery-tab');
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentFilter = tab.dataset.filter;
+            isExpanded = false;
+            renderGallery();
+        });
+    });
+
+    // Slider Controls (Next / Prev)
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSliderPosition();
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const itemsPerView = getItemsPerView();
+            const maxSlide = Math.max(0, galleryTrack ? galleryTrack.children.length - itemsPerView : 0);
+            if (currentSlide < maxSlide) {
+                currentSlide++;
+                updateSliderPosition();
+            }
+        });
+    }
+
+    // Load More Button Event
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            renderGallery();
+        });
+    }
+
+    // Window Resize Handler
+    window.addEventListener('resize', () => {
+        updateSliderPosition();
+    });
+
+    // Touch Swipe Support for Home Slider
+    if (galleryTrack) {
+        let startX = 0;
+        let dist = 0;
+        galleryTrack.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        galleryTrack.addEventListener('touchend', (e) => {
+            dist = e.changedTouches[0].clientX - startX;
+            if (dist < -40) {
+                const itemsPerView = getItemsPerView();
+                const maxSlide = Math.max(0, galleryTrack.children.length - itemsPerView);
+                if (currentSlide < maxSlide) {
+                    currentSlide++;
+                    updateSliderPosition();
+                }
+            } else if (dist > 40) {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSliderPosition();
+                }
+            }
+        }, { passive: true });
+    }
+
+    // ==========================================
+    // LIGHTBOX CONTROLLER
+    // ==========================================
+    function openLightbox(index) {
+        if (!lightbox || index < 0 || index >= filteredItems.length) return;
+        activeLightboxIndex = index;
+        updateLightboxContent();
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function updateLightboxContent() {
+        const item = filteredItems[activeLightboxIndex];
+        if (!item) return;
+
+        lightboxImg.src = item.image;
+        lightboxImg.alt = item.title;
+        lightboxTitle.textContent = item.title;
+        lightboxCategory.textContent = item.categoryLabel;
+        lightboxCaption.textContent = item.caption;
+        lightboxCounter.textContent = `${activeLightboxIndex + 1} / ${filteredItems.length}`;
+    }
+
+    function prevLightbox() {
+        activeLightboxIndex = (activeLightboxIndex - 1 + filteredItems.length) % filteredItems.length;
+        updateLightboxContent();
+    }
+
+    function nextLightbox() {
+        activeLightboxIndex = (activeLightboxIndex + 1) % filteredItems.length;
+        updateLightboxContent();
+    }
+
+    // Lightbox Controls Events
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+    if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightbox);
+    if (lightboxNext) lightboxNext.addEventListener('click', nextLightbox);
+
+    // Keyboard Shortcuts (Arrow Left/Right & Escape)
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevLightbox();
+        if (e.key === 'ArrowRight') nextLightbox();
+    });
+
+    // Initial render
+    renderGallery();
 }
