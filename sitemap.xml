@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Home Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.courtmarriageguwahati.com/images/hero_couple.jpg</image:loc>
+      <image:title>Court Marriage in Guwahati - Legal Registration</image:title>
+    </image:image>
+  </url>
+
+  <!-- About Advocate Khusboo Verma -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/about-advocate.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.courtmarriageguwahati.com/images/advocate_portrait.jpg</image:loc>
+      <image:title>Advocate Khusboo Verma Gauhati High Court Lawyer</image:title>
+    </image:image>
+  </url>
+
+  <!-- Services Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/services.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Court Marriage Process & Procedure -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/court-marriage-process.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Client Marriage Gallery -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/gallery.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- FAQ Knowledge Center -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/faq.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Us & Location -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/contact.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/privacy-policy.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/terms-of-service.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Legal Disclaimer -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/disclaimer.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

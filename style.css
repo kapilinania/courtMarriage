@@ -5319,3 +5319,206 @@ html, body {
         font-size: 17px !important;
     }
 }
+
+/* ==========================================================================
+   LEGAL PAGES LAYOUT (Privacy Policy, Terms, Disclaimer)
+   ========================================================================== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.content-sidebar,
+.content-main,
+.main-content-col,
+.sidebar-col {
+    min-width: 0;
+}
+
+.content-sidebar {
+    position: sticky;
+    top: 120px;
+}
+
+/* Policy cards used in new legal pages */
+.policy-card,
+.legal-card,
+.content-card {
+    background: #ffffff;
+    border-left: 4px solid var(--secondary);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.policy-card:hover,
+.legal-card:hover,
+.content-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.policy-card h2,
+.legal-card h2 {
+    color: var(--primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin: 0 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.policy-card h2 i,
+.legal-card h2 i {
+    color: var(--secondary);
+    font-size: 1.1rem;
+}
+
+.policy-card p,
+.legal-card p {
+    color: #4a5568;
+    line-height: 1.75;
+    margin-bottom: 15px;
+}
+
+.policy-card p:last-child,
+.legal-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Sidebar widgets */
+.sidebar-widget {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.sidebar-widget h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-widget h3 i {
+    color: var(--secondary);
+}
+
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-links li {
+    margin-bottom: 10px;
+}
+
+.sidebar-links li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar-links li a:hover,
+.sidebar-links li a.active {
+    background: var(--primary-dark);
+    color: #ffffff;
+}
+
+/* BCI notice block (Disclaimer page) */
+.bci-notice {
+    background: var(--primary-dark);
+    color: #ffffff;
+    padding: 28px 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--secondary);
+}
+
+.bci-notice h2 {
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin: 0 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bci-notice h2 i {
+    color: var(--secondary);
+}
+
+.bci-notice p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+/* Credential and contact info lists */
+.credential-list,
+.contact-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.credential-list li,
+.contact-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #475569;
+}
+
+.credential-list li i,
+.contact-info-list li i {
+    color: var(--secondary);
+    margin-top: 3px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Page content section wrapper */
+.page-content {
+    background: #f8fafc;
+    padding: 70px 0;
+}
+
+/* Responsive: stack grid on tablet/mobile */
+@media (max-width: 991px) {
+    .content-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .content-sidebar {
+        position: static !important;
+        margin-top: 0;
+    }
+}
+
+

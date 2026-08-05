@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /scratch/
+Disallow: /.*
+
+Sitemap: https://www.courtmarriageguwahati.com/sitemap.xml
