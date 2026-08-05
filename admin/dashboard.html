@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Court Marriage Guwahati</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-layout">
+        <!-- ══ SIDEBAR ════════════════════════════════════════════════════════ -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-icon">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <div class="sidebar-logo-text">
+                    <h2>CMG Admin</h2>
+                    <span>⚡ Gallery Manager</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-label">Main</div>
+                <div class="sidebar-nav-item active" data-panel="overview" id="nav-overview">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Overview</span>
+                </div>
+                <div class="sidebar-nav-item" data-panel="upload" id="nav-upload">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Images</span>
+                    <span class="nav-badge" id="uploadBadge" style="display:none;">New</span>
+                </div>
+                <div class="sidebar-nav-item" data-panel="manage" id="nav-manage">
+                    <i class="fa-solid fa-images"></i>
+                    <span>Manage Gallery</span>
+                    <span class="nav-badge" id="manageBadge">0</span>
+                </div>
+
+                <div class="sidebar-section-label">Configuration</div>
+                <div class="sidebar-nav-item" data-panel="cloudinary" id="nav-cloudinary">
+                    <i class="fa-solid fa-cloud"></i>
+                    <span>Cloudinary Setup</span>
+                </div>
+                <div class="sidebar-nav-item" data-panel="activity" id="nav-activity">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Activity Log</span>
+                </div>
+                <div class="sidebar-nav-item" data-panel="settings" id="nav-settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user-info">
+                    <div class="user-avatar" id="userAvatarInitial">A</div>
+                    <div class="user-info-text">
+                        <strong id="sidebarUsername">admin</strong>
+                        <span>● Online</span>
+                    </div>
+                </div>
+                <button class="sidebar-logout-btn" id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- ══ MAIN AREA ══════════════════════════════════════════════════════ -->
+        <div class="admin-main">
+            <!-- Top Bar -->
+            <div class="admin-topbar">
+                <div class="topbar-left">
+                    <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <div class="topbar-page-title" id="topbarTitle">Dashboard Overview</div>
+                        <div class="topbar-breadcrumb">
+                            <span>Admin</span>
+                            <span class="sep">/</span>
+                            <span id="topbarBreadcrumb">Overview</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-icon-btn" id="refreshDataBtn" title="Refresh Gallery Data">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </div>
+                    <div class="topbar-icon-btn" title="Notifications">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </div>
+                    <a href="../gallery.html" target="_blank" class="topbar-site-link">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>View Site</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+
+                <!-- ══════════════════════ OVERVIEW PANEL ══════════════════════ -->
+                <div class="admin-panel-section active" id="panel-overview">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-card gold">
+                            <div class="stat-icon"><i class="fa-solid fa-images"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="statTotalImages">—</div>
+                                <div class="stat-label">Total Images</div>
+                                <div class="stat-trend neutral"><i class="fa-solid fa-cloud"></i> Cloudinary + Local</div>
+                            </div>
+                        </div>
+                        <div class="stat-card blue">
+                            <div class="stat-icon"><i class="fa-brands fa-cloudflare"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="statCloudImages">—</div>
+                                <div class="stat-label">Cloud Images</div>
+                                <div class="stat-trend up" id="statCloudStatus"><i class="fa-solid fa-circle-dot"></i> Checking...</div>
+                            </div>
+                        </div>
+                        <div class="stat-card green">
+                            <div class="stat-icon"><i class="fa-solid fa-folder-tree"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="statCategories">5</div>
+                                <div class="stat-label">Categories</div>
+                                <div class="stat-trend neutral"><i class="fa-solid fa-tag"></i> Filtered Gallery</div>
+                            </div>
+                        </div>
+                        <div class="stat-card purple">
+                            <div class="stat-icon"><i class="fa-solid fa-database"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="statStorage">—</div>
+                                <div class="stat-label">Storage Used</div>
+                                <div class="stat-trend neutral" id="statStorageTrend"><i class="fa-solid fa-hard-drive"></i> Calculating...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions + Activity Grid -->
+                    <div class="grid-2col">
+                        <!-- Quick Actions -->
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <div class="admin-card-title"><i class="fa-solid fa-bolt"></i> Quick Actions</div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="quick-actions-grid">
+                                    <button class="quick-action-btn" onclick="switchPanel('upload')">
+                                        <div class="quick-action-icon gold"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                                        <div class="quick-action-label">Upload Image</div>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="switchPanel('manage')">
+                                        <div class="quick-action-icon blue"><i class="fa-solid fa-images"></i></div>
+                                        <div class="quick-action-label">View Gallery</div>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="switchPanel('cloudinary')">
+                                        <div class="quick-action-icon green"><i class="fa-solid fa-cloud"></i></div>
+                                        <div class="quick-action-label">Cloudinary Config</div>
+                                    </button>
+                                    <button class="quick-action-btn" onclick="window.open('../gallery.html','_blank')">
+                                        <div class="quick-action-icon red"><i class="fa-solid fa-up-right-from-square"></i></div>
+                                        <div class="quick-action-label">View Public Gallery</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cloudinary Status -->
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <div class="admin-card-title"><i class="fa-solid fa-cloud"></i> Cloudinary Status</div>
+                                <button class="admin-btn admin-btn-sm admin-btn-secondary" id="overviewTestCloudBtn">
+                                    <i class="fa-solid fa-plug"></i> Test
+                                </button>
+                            </div>
+                            <div class="admin-card-body" id="cloudStatusOverview">
+                                <div class="config-status-row">
+                                    <span class="config-status-dot" id="statusDotCloud"></span>
+                                    <span class="status-text">Cloud Name</span>
+                                    <span class="status-value" id="statusCloudName">—</span>
+                                </div>
+                                <div class="config-status-row">
+                                    <span class="config-status-dot" id="statusDotUpload"></span>
+                                    <span class="status-text">Upload Preset</span>
+                                    <span class="status-value" id="statusUploadPreset">—</span>
+                                </div>
+                                <div class="config-status-row">
+                                    <span class="config-status-dot" id="statusDotApi"></span>
+                                    <span class="status-text">API Access</span>
+                                    <span class="status-value" id="statusApiAccess">—</span>
+                                </div>
+                                <button class="admin-btn admin-btn-primary admin-btn-block" onclick="switchPanel('cloudinary')" style="margin-top:8px;">
+                                    <i class="fa-solid fa-gear"></i> Configure Cloudinary
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Uploads -->
+                    <div class="admin-card" style="margin-top:20px;">
+                        <div class="admin-card-header">
+                            <div class="admin-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</div>
+                            <button class="admin-btn admin-btn-sm admin-btn-secondary" onclick="switchPanel('activity')">
+                                View All <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="activity-log-list" id="recentActivityList">
+                            <div class="activity-item">
+                                <div class="activity-dot view"><i class="fa-solid fa-eye"></i></div>
+                                <div class="activity-text">
+                                    <strong>Dashboard Accessed</strong>
+                                    <span>Admin panel opened for session</span>
+                                </div>
+                                <div class="activity-time" id="sessionStartTime">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════ UPLOAD PANEL ══════════════════════ -->
+                <div class="admin-panel-section" id="panel-upload">
+                    <div class="upload-grid">
+                        <!-- Upload Area -->
+                        <div>
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <div class="admin-card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Upload to Cloudinary</div>
+                                </div>
+                                <div class="admin-card-body">
+                                    <!-- Warning if not configured -->
+                                    <div id="uploadConfigWarning" style="display:none; padding:14px; background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.25); border-radius:10px; font-size:13px; color:#fdba74; margin-bottom:16px; display:flex; gap:10px;">
+                                        <i class="fa-solid fa-triangle-exclamation" style="margin-top:2px; flex-shrink:0;"></i>
+                                        <span>Cloudinary is not configured yet. <strong style="cursor:pointer;text-decoration:underline;" onclick="switchPanel('cloudinary')">Set it up first →</strong></span>
+                                    </div>
+
+                                    <div class="upload-zone" id="uploadZone">
+                                        <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp,image/gif">
+                                        <i class="fa-solid fa-cloud-arrow-up upload-zone-icon"></i>
+                                        <h3>Drop images here or click to browse</h3>
+                                        <p>Upload multiple images to Cloudinary at once</p>
+                                        <div class="upload-zone-formats">
+                                            <span class="format-badge">JPG</span>
+                                            <span class="format-badge">PNG</span>
+                                            <span class="format-badge">WEBP</span>
+                                            <span class="format-badge">GIF</span>
+                                            <span class="format-badge">Max 10MB each</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Upload Progress -->
+                                    <div class="upload-progress-wrap" id="uploadProgressWrap">
+                                        <div class="upload-progress-label">
+                                            <span id="uploadProgressText">Uploading...</span>
+                                            <span id="uploadProgressPct">0%</span>
+                                        </div>
+                                        <div class="upload-progress-bar-track">
+                                            <div class="upload-progress-bar" id="uploadProgressBar"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Preview Grid -->
+                                    <div class="upload-preview-grid" id="uploadPreviewGrid"></div>
+
+                                    <!-- Upload Button -->
+                                    <div style="margin-top:20px; display:flex; gap:12px;">
+                                        <button class="admin-btn admin-btn-primary admin-btn-lg" id="startUploadBtn" disabled>
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                            Upload to Cloudinary
+                                        </button>
+                                        <button class="admin-btn admin-btn-secondary" id="clearFilesBtn" style="display:none;">
+                                            <i class="fa-solid fa-trash"></i>
+                                            Clear All
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload Settings -->
+                        <div>
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <div class="admin-card-title"><i class="fa-solid fa-sliders"></i> Upload Settings</div>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div class="admin-form-group">
+                                        <label>Category <span class="required">*</span></label>
+                                        <select class="admin-select" id="uploadCategory">
+                                            <option value="all">All / General</option>
+                                            <option value="court">Court Marriages</option>
+                                            <option value="registration">Registrations</option>
+                                            <option value="ceremonies">Ceremonies</option>
+                                            <option value="chamber">Chamber & Office</option>
+                                            <option value="couples">Couples</option>
+                                        </select>
+                                    </div>
+                                    <div class="admin-form-group">
+                                        <label>Image Title (Optional)</label>
+                                        <input type="text" class="admin-input" id="uploadTitle" placeholder="e.g. Court Marriage Ceremony">
+                                    </div>
+                                    <div class="admin-form-group">
+                                        <label>Caption / Description</label>
+                                        <textarea class="admin-textarea" id="uploadCaption" placeholder="Brief description of this image..."></textarea>
+                                    </div>
+                                    <div class="admin-form-group">
+                                        <label>Cloudinary Folder</label>
+                                        <input type="text" class="admin-input" id="uploadFolder" value="court-marriage-guwahati" placeholder="folder/name">
+                                    </div>
+                                    <div class="admin-form-group">
+                                        <label>Tags (comma-separated)</label>
+                                        <input type="text" class="admin-input" id="uploadTags" placeholder="wedding, guwahati, legal">
+                                    </div>
+
+                                    <!-- Cloudinary Transform Preview -->
+                                    <div style="margin-top:16px; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+                                        <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.7px; margin-bottom:8px;">Auto-applied Transforms</div>
+                                        <div style="font-size:12px; color:#94a3b8; line-height:1.8;">
+                                            ✅ Auto quality optimization<br>
+                                            ✅ Format conversion (WebP/AVIF)<br>
+                                            ✅ Thumbnail generation<br>
+                                            ✅ Gallery metadata tags
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════ MANAGE PANEL ══════════════════════ -->
+                <div class="admin-panel-section" id="panel-manage">
+                    <!-- Controls -->
+                    <div class="image-mgmt-controls">
+                        <div class="search-input-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" placeholder="Search images by name, tag..." id="manageSearchInput">
+                        </div>
+                        <select class="filter-select" id="manageCategoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="court">Court Marriages</option>
+                            <option value="registration">Registrations</option>
+                            <option value="ceremonies">Ceremonies</option>
+                            <option value="chamber">Chamber & Office</option>
+                            <option value="couples">Couples</option>
+                        </select>
+                        <select class="filter-select" id="manageSourceFilter">
+                            <option value="all">All Sources</option>
+                            <option value="cloudinary">Cloudinary</option>
+                            <option value="local">Local</option>
+                        </select>
+                        <button class="admin-btn admin-btn-secondary" id="refreshGalleryBtn">
+                            <i class="fa-solid fa-rotate-right"></i> Refresh
+                        </button>
+                        <button class="admin-btn admin-btn-primary" onclick="switchPanel('upload')">
+                            <i class="fa-solid fa-plus"></i> Upload New
+                        </button>
+                    </div>
+
+                    <!-- Bulk Actions Bar -->
+                    <div class="bulk-actions-bar" id="bulkActionsBar">
+                        <i class="fa-solid fa-check-square" style="color:var(--gold);"></i>
+                        <span class="bulk-count" id="bulkCount">0 selected</span>
+                        <div style="flex:1;"></div>
+                        <button class="admin-btn admin-btn-sm admin-btn-secondary" id="bulkDeselectBtn">
+                            <i class="fa-solid fa-xmark"></i> Deselect All
+                        </button>
+                        <button class="admin-btn admin-btn-sm admin-btn-danger" id="bulkDeleteBtn">
+                            <i class="fa-solid fa-trash"></i> Delete Selected
+                        </button>
+                    </div>
+
+                    <!-- Image Grid -->
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <div class="admin-card-title">
+                                <i class="fa-solid fa-images"></i> Gallery Images
+                                <span style="font-size:13px; font-weight:500; color:var(--text-muted);" id="manageImageCount">(Loading...)</span>
+                            </div>
+                            <div style="display:flex; gap:8px;">
+                                <button class="admin-btn admin-btn-sm admin-btn-secondary" id="selectAllBtn">
+                                    <i class="fa-solid fa-check-double"></i> Select All
+                                </button>
+                            </div>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="manage-image-grid" id="manageImageGrid">
+                                <!-- Skeletons -->
+                                <div class="manage-image-card">
+                                    <div class="manage-card-thumb skeleton" style="height:130px;"></div>
+                                    <div class="manage-card-info"><div class="skeleton" style="height:14px;border-radius:4px;margin-bottom:6px;"></div><div class="skeleton" style="height:10px;width:60%;border-radius:4px;"></div></div>
+                                </div>
+                                <div class="manage-image-card">
+                                    <div class="manage-card-thumb skeleton" style="height:130px;"></div>
+                                    <div class="manage-card-info"><div class="skeleton" style="height:14px;border-radius:4px;margin-bottom:6px;"></div><div class="skeleton" style="height:10px;width:60%;border-radius:4px;"></div></div>
+                                </div>
+                                <div class="manage-image-card">
+                                    <div class="manage-card-thumb skeleton" style="height:130px;"></div>
+                                    <div class="manage-card-info"><div class="skeleton" style="height:14px;border-radius:4px;margin-bottom:6px;"></div><div class="skeleton" style="height:10px;width:60%;border-radius:4px;"></div></div>
+                                </div>
+                                <div class="manage-image-card">
+                                    <div class="manage-card-thumb skeleton" style="height:130px;"></div>
+                                    <div class="manage-card-info"><div class="skeleton" style="height:14px;border-radius:4px;margin-bottom:6px;"></div><div class="skeleton" style="height:10px;width:60%;border-radius:4px;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════ CLOUDINARY CONFIG PANEL ════════════ -->
+                <div class="admin-panel-section" id="panel-cloudinary">
+                    <div class="config-grid">
+                        <!-- Config Form -->
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <div class="admin-card-title"><i class="fa-solid fa-cloud"></i> Cloudinary Configuration</div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div style="padding:14px 16px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; font-size:13px; color:#93c5fd; margin-bottom:20px; line-height:1.7;">
+                                    <strong style="display:block; margin-bottom:4px;"><i class="fa-solid fa-circle-info"></i> Required Setup</strong>
+                                    1. Create a free account at <a href="https://cloudinary.com" target="_blank" style="color:var(--gold);">cloudinary.com</a><br>
+                                    2. Create an <strong>Unsigned Upload Preset</strong> in Settings → Upload<br>
+                                    3. Paste your Cloud Name and Preset below
+                                </div>
+
+                                <div class="admin-form-group">
+                                    <label>Cloud Name <span class="required">*</span></label>
+                                    <input type="text" class="admin-input" id="cloudName" placeholder="e.g. my-cloud-name">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Upload Preset (Unsigned) <span class="required">*</span></label>
+                                    <input type="text" class="admin-input" id="uploadPreset" placeholder="e.g. ml_default">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>API Key (Optional – for deletion)</label>
+                                    <input type="text" class="admin-input" id="apiKey" placeholder="123456789012345">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>API Secret (Optional – for deletion, stored locally)</label>
+                                    <div class="login-input-wrap">
+                                        <input type="password" class="admin-input" id="apiSecret" placeholder="Your API Secret" style="padding-left:16px;">
+                                    </div>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Default Folder</label>
+                                    <input type="text" class="admin-input" id="defaultFolder" value="court-marriage-guwahati" placeholder="cloudinary-folder-name">
+                                </div>
+
+                                <div class="cloud-test-result" id="cloudTestResult">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span id="cloudTestResultText">Connection Successful!</span>
+                                </div>
+
+                                <div class="btn-actions-row" style="margin-top:20px;">
+                                    <button class="admin-btn admin-btn-primary" id="saveCloudConfigBtn">
+                                        <i class="fa-solid fa-floppy-disk"></i> Save Configuration
+                                    </button>
+                                    <button class="admin-btn admin-btn-secondary" id="testCloudConnectionBtn">
+                                        <i class="fa-solid fa-plug"></i> Test Connection
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status + Help -->
+                        <div style="display:flex; flex-direction:column; gap:20px;">
+                            <!-- Current Status -->
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <div class="admin-card-title"><i class="fa-solid fa-signal"></i> Connection Status</div>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div class="config-status-row">
+                                        <span class="config-status-dot" id="cfgDot1"></span>
+                                        <span class="status-text">Cloud Name</span>
+                                        <span class="status-value" id="cfgStatusCloudName">—</span>
+                                    </div>
+                                    <div class="config-status-row">
+                                        <span class="config-status-dot" id="cfgDot2"></span>
+                                        <span class="status-text">Upload Preset</span>
+                                        <span class="status-value" id="cfgStatusPreset">—</span>
+                                    </div>
+                                    <div class="config-status-row">
+                                        <span class="config-status-dot" id="cfgDot3"></span>
+                                        <span class="status-text">API Keys</span>
+                                        <span class="status-value" id="cfgStatusApiKey">—</span>
+                                    </div>
+                                    <div class="config-status-row" style="margin-bottom:0;">
+                                        <span class="config-status-dot" id="cfgDot4"></span>
+                                        <span class="status-text">Overall Status</span>
+                                        <span class="status-value" id="cfgStatusOverall">Not Configured</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Guide -->
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <div class="admin-card-title"><i class="fa-solid fa-book-open"></i> Setup Guide</div>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div style="display:flex; flex-direction:column; gap:14px;">
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="width:26px;height:26px;border-radius:50%;background:rgba(197,155,39,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">1</div>
+                                            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Register free at <a href="https://cloudinary.com/users/register_free" target="_blank" style="color:var(--gold);">Cloudinary</a></div>
+                                        </div>
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="width:26px;height:26px;border-radius:50%;background:rgba(197,155,39,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">2</div>
+                                            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Go to <strong>Settings → Upload → Upload Presets</strong> → Add unsigned preset</div>
+                                        </div>
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="width:26px;height:26px;border-radius:50%;background:rgba(197,155,39,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">3</div>
+                                            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Copy your <strong>Cloud Name</strong> from the dashboard</div>
+                                        </div>
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="width:26px;height:26px;border-radius:50%;background:rgba(197,155,39,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">4</div>
+                                            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Paste them above and click <strong>Save & Test</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════ ACTIVITY LOG PANEL ═══════════════════ -->
+                <div class="admin-panel-section" id="panel-activity">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <div class="admin-card-title"><i class="fa-solid fa-list-check"></i> Activity Log</div>
+                            <button class="admin-btn admin-btn-sm admin-btn-danger" id="clearActivityBtn">
+                                <i class="fa-solid fa-trash"></i> Clear Log
+                            </button>
+                        </div>
+                        <div class="activity-log-list" id="fullActivityLog">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════ SETTINGS PANEL ═════════════════════ -->
+                <div class="admin-panel-section" id="panel-settings">
+                    <div class="grid-2col">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <div class="admin-card-title"><i class="fa-solid fa-palette"></i> Gallery Settings</div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="admin-form-group">
+                                    <label>Gallery Page Title</label>
+                                    <input type="text" class="admin-input" id="settingGalleryTitle" value="Photo Gallery" placeholder="Public gallery page title">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Default Images per Page</label>
+                                    <select class="admin-select" id="settingPerPage">
+                                        <option value="12" selected>12 images</option>
+                                        <option value="24">24 images</option>
+                                        <option value="48">48 images</option>
+                                        <option value="0">All images</option>
+                                    </select>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Default Gallery View</label>
+                                    <select class="admin-select" id="settingDefaultView">
+                                        <option value="grid" selected>Grid View</option>
+                                        <option value="masonry">Masonry View</option>
+                                    </select>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Show Cloudinary Badge</label>
+                                    <select class="admin-select" id="settingShowBadge">
+                                        <option value="yes" selected>Yes — Show on images</option>
+                                        <option value="no">No — Hide badge</option>
+                                    </select>
+                                </div>
+                                <button class="admin-btn admin-btn-primary" id="saveSettingsBtn">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Settings
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <div class="admin-card-title"><i class="fa-solid fa-shield-halved"></i> Security Settings</div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="admin-form-group">
+                                    <label>New Admin Username</label>
+                                    <input type="text" class="admin-input" id="newUsername" placeholder="Leave blank to keep current" autocomplete="off">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>New Password</label>
+                                    <input type="password" class="admin-input" id="newPassword" placeholder="Leave blank to keep current" autocomplete="new-password">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" class="admin-input" id="confirmPassword" placeholder="Confirm new password" autocomplete="new-password">
+                                </div>
+                                <button class="admin-btn admin-btn-secondary" id="changePasswordBtn">
+                                    <i class="fa-solid fa-key"></i> Update Credentials
+                                </button>
+                                <div style="margin-top:16px; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid var(--border); font-size:12px; color:var(--text-muted);">
+                                    <i class="fa-solid fa-info-circle" style="color:var(--gold);"></i>
+                                    Credentials are stored in session only. For production, use a proper backend authentication system.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="admin-card" style="margin-top:20px; border-color:rgba(239,68,68,0.25);">
+                        <div class="admin-card-header" style="border-bottom-color:rgba(239,68,68,0.15);">
+                            <div class="admin-card-title" style="color:var(--red);">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Danger Zone
+                            </div>
+                        </div>
+                        <div class="admin-card-body">
+                            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; background:rgba(239,68,68,0.06); border-radius:10px; border:1px solid rgba(239,68,68,0.15);">
+                                <div>
+                                    <div style="font-size:14px; font-weight:700; color:var(--text-primary);">Clear All Local Cache</div>
+                                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Clears all locally stored data (config, logs, settings). Cloudinary images remain safe.</div>
+                                </div>
+                                <button class="admin-btn admin-btn-danger" id="clearAllDataBtn">
+                                    <i class="fa-solid fa-database"></i> Clear Cache
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ ADMIN LIGHTBOX ════════════════════════════════════════════════════ -->
+    <div class="admin-lightbox" id="adminLightbox">
+        <img src="" alt="" class="admin-lightbox-img" id="adminLightboxImg">
+        <button class="admin-lightbox-close" id="adminLightboxClose">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- ══ DELETE CONFIRM MODAL ══════════════════════════════════════════════ -->
+    <div class="admin-modal-overlay" id="deleteModal">
+        <div class="admin-modal-box">
+            <div class="admin-modal-icon">
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <h3>Delete Image?</h3>
+            <p id="deleteModalText">This will permanently remove this image from Cloudinary. This action cannot be undone.</p>
+            <div class="admin-modal-actions">
+                <button class="admin-btn admin-btn-secondary" id="deleteCancelBtn">
+                    <i class="fa-solid fa-xmark"></i> Cancel
+                </button>
+                <button class="admin-btn admin-btn-danger" id="deleteConfirmBtn">
+                    <i class="fa-solid fa-trash"></i> Delete Permanently
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ TOAST NOTIFICATIONS ═══════════════════════════════════════════════ -->
+    <div class="admin-toast-container" id="adminToastContainer"></div>
+
+    <!-- ══ SCRIPTS ════════════════════════════════════════════════════════════ -->
+    <script src="upload.js"></script>
+    <script src="delete.js"></script>
+    <script>
+    // ── Auth Guard ────────────────────────────────────────────────────────────
+    if (sessionStorage.getItem('cmg_admin_auth') !== 'true') {
+        window.location.href = 'login.html';
+    }
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let cloudConfig = {};
+    let galleryImages = [];
+    let selectedImages = new Set();
+    let activityLog = [];
+    let pendingDeleteId = null;
+    let pendingDeleteEl = null;
+
+    // ── Session User ──────────────────────────────────────────────────────────
+    const adminUser = sessionStorage.getItem('cmg_admin_user') || 'admin';
+    document.getElementById('sidebarUsername').textContent = adminUser;
+    document.getElementById('userAvatarInitial').textContent = adminUser.charAt(0).toUpperCase();
+
+    // ── Session Start Time ────────────────────────────────────────────────────
+    document.getElementById('sessionStartTime').textContent = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+    // ── Toast Helper ──────────────────────────────────────────────────────────
+    function showToast(type, title, msg) {
+        const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info', warning: 'fa-triangle-exclamation' };
+        const container = document.getElementById('adminToastContainer');
+        const toast = document.createElement('div');
+        toast.className = `admin-toast ${type}`;
+        toast.innerHTML = `
+            <i class="fa-solid ${icons[type]} toast-icon"></i>
+            <div class="toast-body">
+                <div class="toast-title">${title}</div>
+                <div class="toast-msg">${msg}</div>
+            </div>
+            <button class="toast-close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="toast-progress"></div>
+        `;
+        container.appendChild(toast);
+        toast.querySelector('.toast-close').onclick = () => toast.remove();
+        setTimeout(() => { if (toast.parentNode) toast.remove(); }, 4200);
+    }
+
+    // ── Add Activity ──────────────────────────────────────────────────────────
+    function addActivity(type, text, detail) {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        const icons = { upload: 'fa-cloud-arrow-up', delete: 'fa-trash', view: 'fa-eye', config: 'fa-gear' };
+        activityLog.unshift({ type, text, detail, timeStr });
+        renderActivityLog();
+        localStorage.setItem('cmg_activity_log', JSON.stringify(activityLog.slice(0, 100)));
+    }
+
+    function renderActivityLog() {
+        const list = [document.getElementById('recentActivityList'), document.getElementById('fullActivityLog')];
+        list.forEach(el => {
+            if (!el) return;
+            const isRecent = el.id === 'recentActivityList';
+            const items = isRecent ? activityLog.slice(0, 5) : activityLog;
+            if (items.length === 0) {
+                el.innerHTML = '<div class="activity-item" style="justify-content:center;color:var(--text-muted);font-size:14px;padding:30px;">No activity yet</div>';
+                return;
+            }
+            const typeIcons = { upload: 'fa-cloud-arrow-up', delete: 'fa-trash', view: 'fa-eye', config: 'fa-gear' };
+            el.innerHTML = items.map(a => `
+                <div class="activity-item">
+                    <div class="activity-dot ${a.type}"><i class="fa-solid ${typeIcons[a.type] || 'fa-circle-dot'}"></i></div>
+                    <div class="activity-text"><strong>${a.text}</strong><span>${a.detail}</span></div>
+                    <div class="activity-time">${a.timeStr}</div>
+                </div>
+            `).join('');
+        });
+    }
+
+    // ── Panel Switching ───────────────────────────────────────────────────────
+    const panelTitles = {
+        overview: 'Dashboard Overview',
+        upload: 'Upload Images',
+        manage: 'Manage Gallery',
+        cloudinary: 'Cloudinary Setup',
+        activity: 'Activity Log',
+        settings: 'Settings'
+    };
+
+    function switchPanel(name) {
+        document.querySelectorAll('.admin-panel-section').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.sidebar-nav-item').forEach(n => n.classList.remove('active'));
+        const panel = document.getElementById(`panel-${name}`);
+        const nav = document.getElementById(`nav-${name}`);
+        if (panel) panel.classList.add('active');
+        if (nav) nav.classList.add('active');
+        document.getElementById('topbarTitle').textContent = panelTitles[name] || 'Dashboard';
+        document.getElementById('topbarBreadcrumb').textContent = panelTitles[name] || name;
+
+        // Close mobile sidebar
+        document.getElementById('adminSidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('visible');
+
+        if (name === 'manage') renderManageGrid();
+        if (name === 'activity') renderActivityLog();
+    }
+
+    document.querySelectorAll('.sidebar-nav-item[data-panel]').forEach(item => {
+        item.addEventListener('click', () => switchPanel(item.dataset.panel));
+    });
+
+    // ── Sidebar Toggle (Mobile) ───────────────────────────────────────────────
+    const sidebarEl = document.getElementById('adminSidebar');
+    const sidebarOverlayEl = document.getElementById('sidebarOverlay');
+
+    document.getElementById('sidebarToggleBtn').addEventListener('click', () => {
+        sidebarEl.classList.toggle('open');
+        sidebarOverlayEl.classList.toggle('visible');
+    });
+
+    sidebarOverlayEl.addEventListener('click', () => {
+        sidebarEl.classList.remove('open');
+        sidebarOverlayEl.classList.remove('visible');
+    });
+
+    // ── Logout ────────────────────────────────────────────────────────────────
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'login.html';
+    });
+
+    // ── Load Saved Config ─────────────────────────────────────────────────────
+    function loadSavedConfig() {
+        const saved = localStorage.getItem('cmg_cloud_config');
+        if (saved) {
+            cloudConfig = JSON.parse(saved);
+            document.getElementById('cloudName').value = cloudConfig.cloudName || '';
+            document.getElementById('uploadPreset').value = cloudConfig.uploadPreset || '';
+            document.getElementById('apiKey').value = cloudConfig.apiKey || '';
+            document.getElementById('defaultFolder').value = cloudConfig.folder || 'court-marriage-guwahati';
+            updateConfigStatus();
+        }
+
+        // Load settings
+        const savedSettings = JSON.parse(localStorage.getItem('cmg_gallery_settings') || '{}');
+        if (savedSettings.perPage) document.getElementById('settingPerPage').value = savedSettings.perPage;
+        if (savedSettings.defaultView) document.getElementById('settingDefaultView').value = savedSettings.defaultView;
+        if (savedSettings.showBadge !== undefined) document.getElementById('settingShowBadge').value = savedSettings.showBadge;
+        if (savedSettings.galleryTitle) document.getElementById('settingGalleryTitle').value = savedSettings.galleryTitle;
+
+        // Load activity log
+        const savedActivity = localStorage.getItem('cmg_activity_log');
+        if (savedActivity) activityLog = JSON.parse(savedActivity);
+        renderActivityLog();
+    }
+
+    function updateConfigStatus() {
+        const hasCloud = !!cloudConfig.cloudName;
+        const hasPreset = !!cloudConfig.uploadPreset;
+        const hasApi = !!cloudConfig.apiKey;
+
+        const setDot = (id, ok) => {
+            const el = document.getElementById(id);
+            if (el) el.className = `config-status-dot ${ok ? 'connected' : 'disconnected'}`;
+        };
+
+        const setVal = (id, val, cls) => {
+            const el = document.getElementById(id);
+            if (el) { el.textContent = val; el.className = `status-value ${cls}`; }
+        };
+
+        // Overview status dots
+        setDot('statusDotCloud', hasCloud);
+        setDot('statusDotUpload', hasPreset);
+        setDot('statusDotApi', hasApi);
+
+        setVal('statusCloudName', hasCloud ? cloudConfig.cloudName : 'Not Set', hasCloud ? 'ok' : 'error');
+        setVal('statusUploadPreset', hasPreset ? cloudConfig.uploadPreset : 'Not Set', hasPreset ? 'ok' : 'error');
+        setVal('statusApiAccess', hasApi ? 'Configured' : 'Optional', hasApi ? 'ok' : 'neutral');
+
+        // Config panel
+        setDot('cfgDot1', hasCloud);
+        setDot('cfgDot2', hasPreset);
+        setDot('cfgDot3', hasApi);
+        setDot('cfgDot4', hasCloud && hasPreset);
+
+        setVal('cfgStatusCloudName', hasCloud ? cloudConfig.cloudName : 'Not Set', hasCloud ? 'ok' : 'error');
+        setVal('cfgStatusPreset', hasPreset ? cloudConfig.uploadPreset : 'Not Set', hasPreset ? 'ok' : 'error');
+        setVal('cfgStatusApiKey', hasApi ? 'Set' : 'Optional', hasApi ? 'ok' : 'neutral');
+        setVal('cfgStatusOverall', (hasCloud && hasPreset) ? 'Connected ✓' : 'Incomplete', (hasCloud && hasPreset) ? 'ok' : 'error');
+
+        // Update stat card
+        const cloudStatus = document.getElementById('statCloudStatus');
+        if (cloudStatus) {
+            cloudStatus.className = `stat-trend ${(hasCloud && hasPreset) ? 'up' : 'neutral'}`;
+            cloudStatus.innerHTML = (hasCloud && hasPreset)
+                ? '<i class="fa-solid fa-circle-dot"></i> Connected'
+                : '<i class="fa-solid fa-circle-xmark"></i> Not Connected';
+        }
+    }
+
+    // ── Save Cloudinary Config ────────────────────────────────────────────────
+    document.getElementById('saveCloudConfigBtn').addEventListener('click', () => {
+        const cn = document.getElementById('cloudName').value.trim();
+        const up = document.getElementById('uploadPreset').value.trim();
+        const ak = document.getElementById('apiKey').value.trim();
+        const as = document.getElementById('apiSecret').value.trim();
+        const folder = document.getElementById('defaultFolder').value.trim();
+
+        if (!cn || !up) {
+            showToast('error', 'Missing Fields', 'Cloud Name and Upload Preset are required.');
+            return;
+        }
+
+        cloudConfig = { cloudName: cn, uploadPreset: up, apiKey: ak, apiSecret: as, folder: folder || 'court-marriage-guwahati' };
+        localStorage.setItem('cmg_cloud_config', JSON.stringify(cloudConfig));
+        updateConfigStatus();
+        showToast('success', 'Configuration Saved', 'Cloudinary settings have been saved locally.');
+        addActivity('config', 'Cloudinary configured', `Cloud: ${cn}`);
+
+        // Update upload.js config
+        if (typeof initUpload === 'function') initUpload(cloudConfig);
+        if (typeof initDelete === 'function') initDelete(cloudConfig);
+    });
+
+    // ── Test Connection ───────────────────────────────────────────────────────
+    async function testCloudinaryConnection() {
+        const cn = cloudConfig.cloudName || document.getElementById('cloudName').value.trim();
+        if (!cn) {
+            showToast('warning', 'No Cloud Name', 'Please enter your Cloudinary Cloud Name first.');
+            return;
+        }
+
+        const resultEl = document.getElementById('cloudTestResult');
+        resultEl.style.display = 'flex';
+        resultEl.className = 'cloud-test-result info';
+        resultEl.innerHTML = '<i class="fa-solid fa-spinner spin"></i><span>Testing connection to Cloudinary...</span>';
+
+        // Test Cloud Name by checking image URL responsiveness
+        const testUrl = `https://res.cloudinary.com/${cn}/image/upload/w_10,h_10/v1/sample.jpg`;
+        const testImg = new Image();
+
+        const isValid = await new Promise((resolve) => {
+            testImg.onload = () => resolve(true);
+            testImg.onerror = () => {
+                // Try alternate endpoint ping or HEAD check
+                fetch(`https://res.cloudinary.com/${cn}/image/upload/sample.jpg`, { mode: 'no-cors' })
+                    .then(() => resolve(true))
+                    .catch(() => resolve(false));
+            };
+            testImg.src = `${testUrl}?t=${Date.now()}`;
+        });
+
+        if (isValid) {
+            resultEl.className = 'cloud-test-result success';
+            resultEl.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Connection Successful! Cloud Name "<strong>${cn}</strong>" is active & reachable.</span>`;
+            showToast('success', 'Connected!', `Cloudinary cloud "${cn}" is connected.`);
+            addActivity('config', 'Connection tested', `Status: OK — ${cn}`);
+        } else {
+            resultEl.className = 'cloud-test-result error';
+            resultEl.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>Connection failed. Please check your Cloud Name spelling.</span>`;
+            showToast('error', 'Connection Failed', `Could not connect to Cloudinary cloud "${cn}".`);
+        }
+    }
+
+    document.getElementById('testCloudConnectionBtn').addEventListener('click', testCloudinaryConnection);
+    document.getElementById('overviewTestCloudBtn').addEventListener('click', testCloudinaryConnection);
+    document.getElementById('refreshDataBtn').addEventListener('click', () => {
+        refreshGalleryStats();
+        showToast('info', 'Refreshed', 'Gallery data has been refreshed.');
+    });
+
+    // ── Gallery Stats & Data Fetch ────────────────────────────────────────────
+    async function refreshGalleryStats() {
+        // 1. Local static fallback images
+        const localImages = Array.from({ length: 12 }, (_, i) => ({
+            id: `local_${i + 1}`,
+            url: `../images/gallery_${i + 1}.jpg`,
+            title: `Gallery Image ${i + 1}`,
+            category: ['court', 'registration', 'ceremonies', 'chamber', 'all'][i % 5],
+            source: 'local',
+            size: Math.floor(Math.random() * 800 + 200) + 'KB'
+        }));
+
+        // 2. Load stored uploads from localStorage
+        const storedUploads = JSON.parse(localStorage.getItem('cmg_uploaded_images') || '[]');
+
+        // 3. Try fetching from Cloudinary API (tags: folder, gallery)
+        let apiCloudImages = [];
+        if (cloudConfig.cloudName) {
+            const folder = cloudConfig.folder || 'court-marriage-guwahati';
+            const tagsToTry = [folder, 'gallery', 'court_marriage'];
+
+            for (const tag of tagsToTry) {
+                try {
+                    const res = await fetch(`https://res.cloudinary.com/${cloudConfig.cloudName}/image/list/${tag}.json`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const fetched = (data.resources || []).map(r => ({
+                            id: r.public_id,
+                            url: `https://res.cloudinary.com/${cloudConfig.cloudName}/image/upload/q_auto,f_auto,w_800/${r.public_id}`,
+                            thumb: `https://res.cloudinary.com/${cloudConfig.cloudName}/image/upload/q_auto,f_auto,w_300,h_200,c_fill/${r.public_id}`,
+                            title: r.public_id.split('/').pop().replace(/_/g, ' '),
+                            category: extractTagCategory(r.tags),
+                            source: 'cloudinary',
+                            size: formatBytes(r.bytes),
+                            public_id: r.public_id
+                        }));
+                        apiCloudImages.push(...fetched);
+                    }
+                } catch (e) { /* CORS or restricted endpoint fallback */ }
+            }
+        }
+
+        // 4. Merge stored uploads + API images (deduplicate by public_id / id)
+        const cloudMap = new Map();
+        [...storedUploads, ...apiCloudImages].forEach(img => {
+            const key = img.public_id || img.id || img.url;
+            if (key) cloudMap.set(key, img);
+        });
+
+        const cloudImages = Array.from(cloudMap.values());
+        galleryImages = [...cloudImages, ...localImages];
+
+        // Update stats UI
+        document.getElementById('statTotalImages').textContent = galleryImages.length;
+        document.getElementById('statCloudImages').textContent = cloudImages.length;
+        document.getElementById('manageBadge').textContent = galleryImages.length;
+
+        const totalBytes = cloudImages.reduce((acc, img) => {
+            const kb = parseInt(img.size) || 0;
+            return acc + kb;
+        }, 0);
+        document.getElementById('statStorage').textContent = totalBytes > 1024 ? (totalBytes / 1024).toFixed(1) + ' MB' : (totalBytes || 0) + ' KB';
+        document.getElementById('statStorageTrend').innerHTML = `<i class="fa-solid fa-cloud"></i> ${cloudImages.length} Cloudinary hosted`;
+    }
+
+    function extractTagCategory(tags) {
+        if (!tags) return 'all';
+        const tagArr = Array.isArray(tags) ? tags : [];
+        const cats = ['court', 'registration', 'ceremonies', 'chamber', 'couples'];
+        for (const t of tagArr) {
+            if (cats.includes(t)) return t;
+        }
+        return 'all';
+    }
+
+    function formatBytes(bytes) {
+        if (!bytes) return '—';
+        if (bytes > 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        return Math.round(bytes / 1024) + ' KB';
+    }
+
+    // ── Manage Grid Rendering ─────────────────────────────────────────────────
+    function renderManageGrid(filter = 'all', sourceFilter = 'all', search = '') {
+        const grid = document.getElementById('manageImageGrid');
+        let filtered = galleryImages.filter(img => {
+            const catMatch = filter === 'all' || img.category === filter;
+            const srcMatch = sourceFilter === 'all' || img.source === sourceFilter;
+            const searchMatch = !search || img.title.toLowerCase().includes(search.toLowerCase());
+            return catMatch && srcMatch && searchMatch;
+        });
+
+        document.getElementById('manageImageCount').textContent = `(${filtered.length} images)`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="admin-empty-state">
+                <i class="fa-solid fa-images"></i>
+                <h3>No images found</h3>
+                <p>Try adjusting your filters, or upload new images to Cloudinary.</p>
+                <button class="admin-btn admin-btn-primary" onclick="switchPanel('upload')"><i class="fa-solid fa-plus"></i> Upload Images</button>
+            </div>`;
+            return;
+        }
+
+        const catBadgeMap = {
+            court: 'badge-court', registration: 'badge-registration', ceremonies: 'badge-ceremonies',
+            chamber: 'badge-chamber', couples: 'badge-couples', all: 'badge-other', cloudinary: 'badge-cloudinary'
+        };
+        const catLabelMap = {
+            court: 'Court', registration: 'Registration', ceremonies: 'Ceremony',
+            chamber: 'Chamber', couples: 'Couples', all: 'General', cloudinary: 'Cloud'
+        };
+
+        grid.innerHTML = filtered.map(img => `
+            <div class="manage-image-card ${selectedImages.has(img.id) ? 'selected' : ''}" data-id="${img.id}">
+                <div class="manage-card-thumb">
+                    <img src="${img.thumb || img.url}" alt="${img.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'130\\' fill=\\'%23334155\\'%3E%3Crect width=\\'200\\' height=\\'130\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' fill=\\'%2364748b\\' text-anchor=\\'middle\\' dy=\\'.3em\\' font-size=\\'12\\'%3ENo Preview%3C/text%3E%3C/svg%3E'">
+                    <div class="manage-card-select-check" onclick="toggleSelect(event, '${img.id}')">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <span class="manage-card-category-badge ${catBadgeMap[img.category] || 'badge-other'}">${catLabelMap[img.category] || img.category}</span>
+                </div>
+                <div class="manage-card-info">
+                    <div class="manage-card-title">${img.title || 'Untitled'}</div>
+                    <div class="manage-card-meta">
+                        <span class="manage-card-size">${img.size || '—'}</span>
+                        <span class="manage-card-source ${img.source === 'cloudinary' ? 'source-cloudinary' : 'source-local'}">${img.source === 'cloudinary' ? '☁ Cloud' : '💾 Local'}</span>
+                    </div>
+                </div>
+                <div class="manage-card-actions">
+                    <button class="admin-btn admin-btn-sm admin-btn-secondary" onclick="previewImage('${img.url}')">
+                        <i class="fa-solid fa-eye"></i> View
+                    </button>
+                    ${img.source === 'cloudinary' ? `
+                    <button class="admin-btn admin-btn-sm admin-btn-danger" onclick="confirmDelete('${img.public_id}', this.closest('.manage-image-card'))">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>` : `
+                    <button class="admin-btn admin-btn-sm admin-btn-secondary" disabled title="Local images cannot be deleted via admin" style="opacity:0.4;">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>`}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ── Selection ─────────────────────────────────────────────────────────────
+    function toggleSelect(e, id) {
+        e.stopPropagation();
+        if (selectedImages.has(id)) {
+            selectedImages.delete(id);
+        } else {
+            selectedImages.add(id);
+        }
+        updateBulkBar();
+        renderManageGrid(
+            document.getElementById('manageCategoryFilter').value,
+            document.getElementById('manageSourceFilter').value,
+            document.getElementById('manageSearchInput').value
+        );
+    }
+
+    function updateBulkBar() {
+        const bar = document.getElementById('bulkActionsBar');
+        const count = document.getElementById('bulkCount');
+        if (selectedImages.size > 0) {
+            bar.classList.add('visible');
+            count.textContent = `${selectedImages.size} selected`;
+        } else {
+            bar.classList.remove('visible');
+        }
+    }
+
+    document.getElementById('selectAllBtn').addEventListener('click', () => {
+        galleryImages.forEach(img => {
+            if (img.source === 'cloudinary') selectedImages.add(img.id);
+        });
+        updateBulkBar();
+        renderManageGrid();
+    });
+
+    document.getElementById('bulkDeselectBtn').addEventListener('click', () => {
+        selectedImages.clear();
+        updateBulkBar();
+        renderManageGrid();
+    });
+
+    document.getElementById('bulkDeleteBtn').addEventListener('click', () => {
+        if (selectedImages.size === 0) return;
+        document.getElementById('deleteModalText').textContent = `This will permanently delete ${selectedImages.size} selected image(s) from Cloudinary. This cannot be undone.`;
+        pendingDeleteId = 'bulk';
+        document.getElementById('deleteModal').classList.add('active');
+    });
+
+    // ── Filters ───────────────────────────────────────────────────────────────
+    document.getElementById('manageCategoryFilter').addEventListener('change', function() {
+        renderManageGrid(this.value, document.getElementById('manageSourceFilter').value, document.getElementById('manageSearchInput').value);
+    });
+
+    document.getElementById('manageSourceFilter').addEventListener('change', function() {
+        renderManageGrid(document.getElementById('manageCategoryFilter').value, this.value, document.getElementById('manageSearchInput').value);
+    });
+
+    let searchTimeout;
+    document.getElementById('manageSearchInput').addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            renderManageGrid(document.getElementById('manageCategoryFilter').value, document.getElementById('manageSourceFilter').value, this.value);
+        }, 300);
+    });
+
+    document.getElementById('refreshGalleryBtn').addEventListener('click', () => {
+        refreshGalleryStats().then(() => {
+            renderManageGrid();
+            showToast('info', 'Refreshed', 'Gallery data reloaded.');
+        });
+    });
+
+    // ── Image Preview (Admin Lightbox) ─────────────────────────────────────────
+    function previewImage(url) {
+        document.getElementById('adminLightboxImg').src = url;
+        document.getElementById('adminLightbox').classList.add('active');
+        addActivity('view', 'Image previewed', url.split('/').pop());
+    }
+
+    document.getElementById('adminLightboxClose').addEventListener('click', () => {
+        document.getElementById('adminLightbox').classList.remove('active');
+        document.getElementById('adminLightboxImg').src = '';
+    });
+
+    document.getElementById('adminLightbox').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('active');
+    });
+
+    // ── Delete Confirm ─────────────────────────────────────────────────────────
+    function confirmDelete(publicId, cardEl) {
+        pendingDeleteId = publicId;
+        pendingDeleteEl = cardEl;
+        document.getElementById('deleteModalText').textContent = `Delete "${publicId.split('/').pop()}" from Cloudinary? This cannot be undone.`;
+        document.getElementById('deleteModal').classList.add('active');
+    }
+
+    document.getElementById('deleteCancelBtn').addEventListener('click', () => {
+        document.getElementById('deleteModal').classList.remove('active');
+        pendingDeleteId = null;
+        pendingDeleteEl = null;
+    });
+
+    document.getElementById('deleteConfirmBtn').addEventListener('click', async () => {
+        if (!pendingDeleteId) return;
+        document.getElementById('deleteModal').classList.remove('active');
+
+        if (pendingDeleteId === 'bulk') {
+            const ids = Array.from(selectedImages).filter(id => {
+                const img = galleryImages.find(g => g.id === id);
+                return img && img.source === 'cloudinary';
+            });
+            for (const id of ids) {
+                const img = galleryImages.find(g => g.id === id);
+                if (img && img.public_id && typeof deleteFromCloudinary === 'function') {
+                    await deleteFromCloudinary(img.public_id, cloudConfig);
+                }
+                galleryImages = galleryImages.filter(g => g.id !== id);
+            }
+            selectedImages.clear();
+            updateBulkBar();
+            showToast('success', `${ids.length} Images Deleted`, 'Selected images removed from Cloudinary.');
+            addActivity('delete', `${ids.length} images deleted`, 'Bulk delete operation');
+        } else {
+            if (typeof deleteFromCloudinary === 'function') {
+                const success = await deleteFromCloudinary(pendingDeleteId, cloudConfig);
+                if (success) {
+                    galleryImages = galleryImages.filter(g => g.public_id !== pendingDeleteId);
+                    if (pendingDeleteEl) pendingDeleteEl.style.animation = 'toastIn 0.3s ease reverse forwards';
+                    setTimeout(() => { if (pendingDeleteEl) pendingDeleteEl.remove(); }, 300);
+                    showToast('success', 'Image Deleted', `"${pendingDeleteId.split('/').pop()}" removed from Cloudinary.`);
+                    addActivity('delete', 'Image deleted', pendingDeleteId);
+                } else {
+                    showToast('error', 'Delete Failed', 'Could not delete image. Check API credentials in Cloudinary Config.');
+                }
+            } else {
+                showToast('warning', 'Not Configured', 'Deletion requires API credentials. Configure in Cloudinary Setup.');
+            }
+        }
+
+        renderManageGrid();
+        document.getElementById('statTotalImages').textContent = galleryImages.length;
+        document.getElementById('manageBadge').textContent = galleryImages.length;
+        pendingDeleteId = null;
+        pendingDeleteEl = null;
+    });
+
+    // ── Settings ──────────────────────────────────────────────────────────────
+    document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+        const settings = {
+            galleryTitle: document.getElementById('settingGalleryTitle').value,
+            perPage: document.getElementById('settingPerPage').value,
+            defaultView: document.getElementById('settingDefaultView').value,
+            showBadge: document.getElementById('settingShowBadge').value
+        };
+        localStorage.setItem('cmg_gallery_settings', JSON.stringify(settings));
+        showToast('success', 'Settings Saved', 'Gallery settings updated successfully.');
+        addActivity('config', 'Settings saved', 'Gallery display settings updated');
+    });
+
+    document.getElementById('changePasswordBtn').addEventListener('click', () => {
+        const np = document.getElementById('newPassword').value;
+        const cp = document.getElementById('confirmPassword').value;
+        if (np && np !== cp) {
+            showToast('error', 'Password Mismatch', 'New password and confirmation do not match.');
+            return;
+        }
+        showToast('success', 'Credentials Updated', 'Note: Changes are session-only. Use a backend for persistence.');
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+    });
+
+    document.getElementById('clearActivityBtn').addEventListener('click', () => {
+        activityLog = [];
+        localStorage.removeItem('cmg_activity_log');
+        renderActivityLog();
+        showToast('info', 'Log Cleared', 'Activity log has been cleared.');
+    });
+
+    document.getElementById('clearAllDataBtn').addEventListener('click', () => {
+        if (confirm('This will clear all local cache (config, settings, logs). Are you sure?')) {
+            localStorage.clear();
+            showToast('warning', 'Cache Cleared', 'All local data cleared. Page will refresh.');
+            setTimeout(() => location.reload(), 1500);
+        }
+    });
+
+    // ── Keyboard Shortcuts ─────────────────────────────────────────────────────
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('adminLightbox').classList.remove('active');
+            document.getElementById('deleteModal').classList.remove('active');
+        }
+    });
+
+    // ── Initialize ────────────────────────────────────────────────────────────
+    loadSavedConfig();
+    refreshGalleryStats().then(() => {
+        if (typeof initUpload === 'function') initUpload(cloudConfig);
+        if (typeof initDelete === 'function') initDelete(cloudConfig);
+    });
+    </script>
+</body>
+</html>

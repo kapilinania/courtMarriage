@@ -1,0 +1,532 @@
+/* ==========================================================================
+   GALLERY.CSS - Dynamic Gallery & Cloudinary Image Grid Styles
+   Court Marriage Guwahati | cloudinary-powered gallery
+   ========================================================================== */
+
+/* ── Gallery Section ─────────────────────────────────────────────────── */
+.gallery-grid-section {
+    padding: 60px 0 80px;
+    background: #f0f4f8;
+}
+
+/* ── Filter Pills ────────────────────────────────────────────────────── */
+.gallery-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.gallery-tab {
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: 2px solid #d0d9e8;
+    background: #ffffff;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+.gallery-tab:hover {
+    border-color: #0b3d91;
+    color: #0b3d91;
+    background: rgba(11, 61, 145, 0.06);
+    transform: translateY(-2px);
+}
+
+.gallery-tab.active {
+    background: linear-gradient(135deg, #04132b, #0b3d91);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(11, 61, 145, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ── Stats Bar ───────────────────────────────────────────────────────── */
+.gallery-stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding: 14px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.gallery-count-label {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.gallery-count-label strong {
+    color: #0b3d91;
+    font-weight: 700;
+}
+
+.gallery-view-toggles {
+    display: flex;
+    gap: 6px;
+}
+
+.view-toggle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+}
+
+.view-toggle-btn.active,
+.view-toggle-btn:hover {
+    background: #0b3d91;
+    color: #fff;
+    border-color: #0b3d91;
+}
+
+/* ── Gallery Grid ────────────────────────────────────────────────────── */
+.gallery-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    min-height: 200px;
+    position: relative;
+}
+
+.gallery-grid-container.masonry-view {
+    columns: 3;
+    gap: 18px;
+    display: block;
+}
+
+.gallery-grid-container.masonry-view .gallery-card {
+    break-inside: avoid;
+    margin-bottom: 18px;
+}
+
+/* ── Gallery Card ────────────────────────────────────────────────────── */
+.gallery-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    aspect-ratio: 4 / 3;
+}
+
+.gallery-card.cloudinary-card {
+    border: 2px solid transparent;
+}
+
+.gallery-card.cloudinary-card:hover {
+    border-color: #c59b27;
+}
+
+.gallery-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(4, 19, 43, 0.18);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.07);
+}
+
+/* ── Card Overlay ────────────────────────────────────────────────────── */
+.gallery-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(4, 19, 43, 0.85) 0%, rgba(4, 19, 43, 0.1) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 16px 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-card-overlay {
+    opacity: 1;
+}
+
+.gallery-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px;
+    line-height: 1.3;
+}
+
+.gallery-card-category {
+    font-size: 11px;
+    color: #c59b27;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.gallery-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.gallery-card-action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.gallery-card-action-btn.view-btn {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    backdrop-filter: blur(4px);
+}
+
+.gallery-card-action-btn.view-btn:hover {
+    background: #c59b27;
+}
+
+/* ── Cloudinary Badge ────────────────────────────────────────────────── */
+.cloudinary-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(4, 19, 43, 0.75);
+    color: #c59b27;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+
+/* ── Skeleton Loading ─────────────────────────────────────────────────── */
+.gallery-skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 14px;
+    aspect-ratio: 4/3;
+}
+
+@keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* ── Empty State ─────────────────────────────────────────────────────── */
+.gallery-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #94a3b8;
+}
+
+.gallery-empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    color: #c7d0dc;
+}
+
+.gallery-empty-state h3 {
+    font-size: 18px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.gallery-empty-state p {
+    font-size: 14px;
+}
+
+/* ── Cloudinary Load More ─────────────────────────────────────────────── */
+.gallery-load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.btn-load-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 32px;
+    background: linear-gradient(135deg, #04132b, #0b3d91);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(11, 61, 145, 0.3);
+}
+
+.btn-load-more:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(11, 61, 145, 0.4);
+    background: linear-gradient(135deg, #0b3d91, #1a5dc8);
+}
+
+.btn-load-more.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Admin Link Bar ──────────────────────────────────────────────────── */
+.gallery-admin-link-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.gallery-admin-link-bar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    padding: 7px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.gallery-admin-link-bar a:hover {
+    color: #0b3d91;
+    border-color: #0b3d91;
+    background: rgba(11, 61, 145, 0.05);
+}
+
+/* ── Lightbox Enhanced ────────────────────────────────────────────────── */
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.gallery-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 19, 43, 0.95);
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+.lightbox-body {
+    flex: 1;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    max-height: 85vh;
+}
+
+.lightbox-img-wrapper {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 78vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: opacity 0.3s;
+}
+
+.lightbox-caption-box {
+    width: 220px;
+    min-width: 220px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lightbox-category {
+    display: inline-block;
+    font-size: 11px;
+    color: #c59b27;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.lightbox-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.lightbox-caption {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.lightbox-counter {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -20px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.lightbox-close:hover {
+    background: rgba(239, 68, 68, 0.8);
+    border-color: transparent;
+}
+
+.lightbox-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    flex-shrink: 0;
+}
+
+.lightbox-arrow:hover {
+    background: rgba(197, 155, 39, 0.8);
+    border-color: transparent;
+    transform: scale(1.1);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .gallery-grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .gallery-grid-container.masonry-view {
+        columns: 2;
+    }
+    .lightbox-caption-box {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid-section { padding: 40px 0 60px; }
+    .gallery-filter-tabs { gap: 8px; }
+    .gallery-tab { padding: 8px 16px; font-size: 13px; }
+    .gallery-grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+    .gallery-grid-container.masonry-view {
+        columns: 2;
+    }
+    .gallery-stats-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .lightbox-content { padding: 0 8px; }
+    .lightbox-arrow { width: 40px; height: 40px; font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .gallery-grid-container.masonry-view {
+        columns: 2;
+        gap: 10px;
+    }
+}
