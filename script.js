@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Modals (Consultation & Service Details)
     initModals();
+    initDownloadFormsModal();
 
     // 8. Viewport Scroll Animations
     initScrollAnimations();
@@ -1471,5 +1472,113 @@ function initMobileReviewSlider() {
 
     track.addEventListener('touchstart', () => clearInterval(autoSlideTimer), { passive: true });
 }
+
+/* ==========================================================================
+   16. DOWNLOAD FORMS MODAL CONTROLLER
+   ========================================================================== */
+function initDownloadFormsModal() {
+    // 1. Ensure modal HTML exists in DOM; inject if missing
+    let modal = document.getElementById('downloadFormsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'downloadFormsModal';
+        modal.innerHTML = `
+            <div class="modal-dialog download-forms-dialog">
+                <div class="modal-content download-forms-content">
+                    <div class="download-forms-header modal-header">
+                        <h3><i class="fa-solid fa-file-pdf"></i> Download Official Legal Forms</h3>
+                        <button class="modal-close" id="closeDownloadFormsModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="download-forms-body modal-body">
+                        <p class="download-forms-intro">Select the required official document to download:</p>
+                        <div class="download-forms-list">
+                            <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="download-form-item">
+                                <div class="df-icon-wrap">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div class="df-details">
+                                    <span class="df-title">Marriage_Application_Form</span>
+                                    <span class="df-subtitle">Application for Registration of Marriage (PDF)</span>
+                                </div>
+                                <div class="df-action-btn">
+                                    <i class="fa-solid fa-download"></i> <span>Download</span>
+                                </div>
+                            </a>
+
+                            <a href="forms/Notice_of_Intended_Marriage.pdf" download="Notice_of_Intended_Marriage.pdf" target="_blank" class="download-form-item">
+                                <div class="df-icon-wrap">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div class="df-details">
+                                    <span class="df-title">Notice_of_Intended_Marriage</span>
+                                    <span class="df-subtitle">Notice of Intended Marriage Form (PDF)</span>
+                                </div>
+                                <div class="df-action-btn">
+                                    <i class="fa-solid fa-download"></i> <span>Download</span>
+                                </div>
+                            </a>
+
+                            <a href="forms/Schedule_III_Declaration_Form.pdf" download="Schedule_III_Declaration_Form.pdf" target="_blank" class="download-form-item">
+                                <div class="df-icon-wrap">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div class="df-details">
+                                    <span class="df-title">Declaration Form</span>
+                                    <span class="df-subtitle">Schedule III Declaration Form (PDF)</span>
+                                </div>
+                                <div class="df-action-btn">
+                                    <i class="fa-solid fa-download"></i> <span>Download</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="download-forms-footer modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelDownloadFormsModal">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-overlay" id="downloadFormsOverlay"></div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    const closeBtn = document.getElementById('closeDownloadFormsModal');
+    const cancelBtn = document.getElementById('cancelDownloadFormsModal');
+    const overlay = document.getElementById('downloadFormsOverlay');
+
+    if (closeBtn) closeBtn.addEventListener('click', () => closeModal(modal));
+    if (cancelBtn) cancelBtn.addEventListener('click', () => closeModal(modal));
+    if (overlay) overlay.addEventListener('click', () => closeModal(modal));
+
+    // Global Click Listener for Download Form triggers
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('#headerDownloadBtn, .btn-download-header, .download-modal-trigger, .drawer-link[href*="forms/"]');
+        
+        if (trigger || (e.target.closest('a') && e.target.closest('a').textContent.trim().toLowerCase().includes('download form'))) {
+            const link = trigger || e.target.closest('a');
+            if (link && !link.classList.contains('download-form-item') && !link.closest('#downloadFormsModal')) {
+                e.preventDefault();
+                
+                // Close mobile drawer if active
+                const mobileDrawer = document.getElementById('mobileDrawer');
+                const drawerOverlay = document.getElementById('drawerOverlay');
+                if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
+                if (drawerOverlay) drawerOverlay.classList.remove('open', 'active');
+                document.body.style.overflow = 'auto';
+
+                openModal(modal);
+            }
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal(modal);
+        }
+    });
+}
+
 
 

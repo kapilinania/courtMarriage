@@ -84,7 +84,7 @@
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="forms/marriage_application_form.pdf" target="_blank" download class="btn btn-download-header" id="headerDownloadBtn"><i class="fa-solid fa-file-pdf"></i> <span>Download Forms</span></a>
+                <a href="javascript:void(0);" class="btn btn-download-header download-modal-trigger" id="headerDownloadBtn"><i class="fa-solid fa-file-pdf"></i> <span>Download Forms</span></a>
                 <a href="tel:+919871761798" class="btn btn-phone-header"><i class="fa-solid fa-phone"></i> <span>+91 98717 61798</span></a>
                 <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
             </div>
@@ -103,7 +103,7 @@
             <li><a href="gallery.html" class="drawer-link">Gallery</a></li>
             <li><a href="about-advocate.html" class="drawer-link">About</a></li>
             <li><a href="contact.html" class="drawer-link">Contact</a></li>
-            <li><a href="forms/marriage_application_form.pdf" target="_blank" download class="drawer-link"><i class="fa-solid fa-file-pdf"></i> Download Forms</a></li>
+            <li><a href="javascript:void(0);" class="drawer-link download-modal-trigger"><i class="fa-solid fa-file-pdf"></i> Download Forms</a></li>
         </ul>
         <div class="drawer-footer">
             <a href="tel:+919871761798" class="btn btn-call-drawer"><i class="fa-solid fa-phone"></i> Call Now</a>
@@ -276,6 +276,65 @@
         <a href="tel:+919871761798" class="floating-btn btn-call-float" aria-label="Call Advocate Now"><i class="fa-solid fa-phone"></i><span class="tooltip">Call Now</span></a>
         <a href="https://wa.me/919871761798?text=Hello,%20I'm%20interested%20in%20Court%20Marriage%20services%20in%20Guwahati.%20Please%20guide%20me." target="_blank" class="floating-btn btn-whatsapp-float" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i><span class="tooltip">WhatsApp Chat</span></a>
     </div>
+    <!-- Download Forms Modal -->
+    <div class="modal" id="downloadFormsModal">
+        <div class="modal-dialog download-forms-dialog">
+            <div class="modal-content download-forms-content">
+                <div class="download-forms-header modal-header">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Download Official Legal Forms</h3>
+                    <button class="modal-close" id="closeDownloadFormsModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="download-forms-body modal-body">
+                    <p class="download-forms-intro">Select the required official document to download:</p>
+                    <div class="download-forms-list">
+                        <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="download-form-item">
+                            <div class="df-icon-wrap">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="df-details">
+                                <span class="df-title">Marriage_Application_Form</span>
+                                <span class="df-subtitle">Application for Registration of Marriage (PDF)</span>
+                            </div>
+                            <div class="df-action-btn">
+                                <i class="fa-solid fa-download"></i> <span>Download</span>
+                            </div>
+                        </a>
+
+                        <a href="forms/Notice_of_Intended_Marriage.pdf" download="Notice_of_Intended_Marriage.pdf" target="_blank" class="download-form-item">
+                            <div class="df-icon-wrap">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="df-details">
+                                <span class="df-title">Notice_of_Intended_Marriage</span>
+                                <span class="df-subtitle">Notice of Intended Marriage Form (PDF)</span>
+                            </div>
+                            <div class="df-action-btn">
+                                <i class="fa-solid fa-download"></i> <span>Download</span>
+                            </div>
+                        </a>
+
+                        <a href="forms/Schedule_III_Declaration_Form.pdf" download="Schedule_III_Declaration_Form.pdf" target="_blank" class="download-form-item">
+                            <div class="df-icon-wrap">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="df-details">
+                                <span class="df-title">Declaration Form</span>
+                                <span class="df-subtitle">Schedule III Declaration Form (PDF)</span>
+                            </div>
+                            <div class="df-action-btn">
+                                <i class="fa-solid fa-download"></i> <span>Download</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download-forms-footer modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDownloadFormsModal">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay" id="downloadFormsOverlay"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
