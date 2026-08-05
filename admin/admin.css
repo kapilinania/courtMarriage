@@ -249,6 +249,87 @@ img { max-width: 100%; }
     animation: fadeIn 0.3s ease;
 }
 
+/* ── OTP 2FA Step ──────────────────────────────────────────────────────────── */
+.otp-container {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.otp-container.active {
+    display: block;
+}
+
+.otp-email-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: var(--radius-sm);
+    color: #93c5fd;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    word-break: break-all;
+}
+
+.otp-inputs-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 20px 0 24px;
+}
+
+.otp-digit-input {
+    width: 44px;
+    height: 52px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.otp-digit-input:focus {
+    border-color: var(--gold);
+    background: rgba(197, 155, 39, 0.1);
+    box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.2);
+    transform: translateY(-2px);
+}
+
+.otp-resend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 16px;
+}
+
+.otp-resend-btn {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 12.5px;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.otp-resend-btn:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    text-decoration: none;
+    opacity: 0.6;
+}
+
 .login-error.show { display: flex; align-items: center; gap: 8px; }
 
 .login-footer {

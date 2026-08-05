@@ -803,6 +803,23 @@
         window.location.href = 'login.html';
     });
 
+    // ── Inactivity Auto-Logout Protection (15 Minutes) ────────────────────────
+    let inactivityTimer;
+    const INACTIVITY_TIMEOUT = 15 * 60 * 1000; // 15 minutes
+
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            sessionStorage.clear();
+            window.location.href = 'login.html?reason=inactivity';
+        }, INACTIVITY_TIMEOUT);
+    }
+
+    ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evt => {
+        window.addEventListener(evt, resetInactivityTimer, { passive: true });
+    });
+    resetInactivityTimer();
+
     // ── Load Saved Config ─────────────────────────────────────────────────────
     function loadSavedConfig() {
         const saved = localStorage.getItem('cmg_cloud_config');
