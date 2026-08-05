@@ -334,193 +334,345 @@
             </div>
         </section>
 
-        <!-- Section 5: Eligibility -->
+        <!-- Section 5: Interactive Eligibility Criteria -->
         <section class="eligibility-section" id="eligibility">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="sub-title">Check Eligibility</span>
                     <h2 class="section-title">Court Marriage Eligibility Criteria</h2>
-                    <p class="section-desc">Before proceeding, ensure both parties meet these statutory requirements under Indian law.</p>
+                    <p class="section-desc">Test your legal eligibility instantly or review the 3 key requirements under Indian law.</p>
                 </div>
                 
+                <!-- Interactive Quick Eligibility Test Quiz -->
+                <div class="eligibility-quiz-wrapper">
+                    <div class="quiz-header">
+                        <h3>⚡ Instant 10-Second Eligibility Test</h3>
+                        <p>Select your details below to check if you can apply for Court Marriage in Guwahati today.</p>
+                    </div>
+                    <form class="eligibility-quiz-form" id="eligibilityQuizForm">
+                        <div class="quiz-field">
+                            <label for="groomAgeSelect">Groom (Boy) Age</label>
+                            <select id="groomAgeSelect" required>
+                                <option value="">Select Age</option>
+                                <option value="21+">21 Years or Older</option>
+                                <option value="under21">Under 21 Years</option>
+                            </select>
+                        </div>
+                        <div class="quiz-field">
+                            <label for="brideAgeSelect">Bride (Girl) Age</label>
+                            <select id="brideAgeSelect" required>
+                                <option value="">Select Age</option>
+                                <option value="18+">18 Years or Older</option>
+                                <option value="under18">Under 18 Years</option>
+                            </select>
+                        </div>
+                        <div class="quiz-field">
+                            <label for="maritalStatusSelect">Marital Status</label>
+                            <select id="maritalStatusSelect" required>
+                                <option value="">Select Status</option>
+                                <option value="valid">Unmarried / Legally Divorced / Widowed</option>
+                                <option value="invalid">Already Married (No Divorce)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-gold" style="padding: 12px 20px; font-weight: 700;">
+                            <i class="fa-solid fa-calculator"></i> Check Now
+                        </button>
+                    </form>
+                    <div class="quiz-result-box" id="quizResultBox">
+                        <span id="quizResultText"></span>
+                        <a href="https://wa.me/919871761798?text=Hello,%20I%20checked%20my%20eligibility%20on%20your%20website.%20Please%20guide%20me%20for%20Court%20Marriage." target="_blank" class="btn btn-sm btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Simple Visual Rule Cards -->
                 <div class="eligibility-grid">
+                    <!-- Card 1: Groom -->
                     <div class="eligibility-card boy-card" data-animate="fade-up">
                         <div class="card-gender-icon"><i class="fa-solid fa-mars"></i></div>
-                        <h3>Groom (Boy) Requirements</h3>
+                        <span class="eligibility-badge">Groom (Boy)</span>
+                        <h3>Groom Requirements</h3>
                         <ul class="eligibility-list">
-                            <li><i class="fa-solid fa-circle-check"></i> Age must be <strong>21 years or older</strong></li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must give free and voluntary consent</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must be of sound mental health</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Status: Unmarried, Legally Divorced, or Widower</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must not fall under prohibited relationships</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Age must be <strong>21 Years or Older</strong></li>
+                            <li><i class="fa-solid fa-circle-check"></i> Unmarried, Divorced, or Widower</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Free &amp; voluntary legal consent</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Sound mental health</li>
                         </ul>
                     </div>
                     
+                    <!-- Card 2: Bride -->
                     <div class="eligibility-card girl-card" data-animate="fade-up">
                         <div class="card-gender-icon"><i class="fa-solid fa-venus"></i></div>
-                        <h3>Bride (Girl) Requirements</h3>
+                        <span class="eligibility-badge">Bride (Girl)</span>
+                        <h3>Bride Requirements</h3>
                         <ul class="eligibility-list">
-                            <li><i class="fa-solid fa-circle-check"></i> Age must be <strong>18 years or older</strong></li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must give free and voluntary consent</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must be of sound mental health</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Status: Unmarried, Legally Divorced, or Widow</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Must not fall under prohibited relationships</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Age must be <strong>18 Years or Older</strong></li>
+                            <li><i class="fa-solid fa-circle-check"></i> Unmarried, Divorced, or Widow</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Free &amp; voluntary legal consent</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Sound mental health</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 3: Witnesses -->
+                    <div class="eligibility-card witness-card" data-animate="fade-up">
+                        <div class="card-gender-icon"><i class="fa-solid fa-users"></i></div>
+                        <span class="eligibility-badge">3 Witnesses</span>
+                        <h3>Witness Requirements</h3>
+                        <ul class="eligibility-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Any <strong>3 Adult Witnesses (18+)</strong></li>
+                            <li><i class="fa-solid fa-circle-check"></i> Friends, relatives, or colleagues</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Valid ID &amp; Address proof needed</li>
+                            <li><i class="fa-solid fa-circle-check"></i> <strong>Parent consent NOT required</strong></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 6: Required Documents -->
+        <!-- Section 6: Interactive Required Documents -->
         <section class="documents-section bg-light" id="documents">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="sub-title">Document Checklist</span>
                     <h2 class="section-title">Required Documents for Court Marriage</h2>
-                    <p class="section-desc">Keep these essential documents ready to ensure a swift, error-free application process.</p>
+                    <p class="section-desc">Tap a tab below to easily view the exact documents needed for your registration.</p>
                 </div>
 
-                <div class="documents-tabs-container">
-                    <div class="document-columns">
-                        <!-- Column 1: Bride & Groom -->
-                        <div class="doc-column" data-animate="fade-right">
-                            <div class="doc-box">
-                                <h3 class="doc-box-title"><i class="fa-solid fa-user-group"></i> Bride & Groom Documents</h3>
-                                <ul class="doc-list">
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-file-lines"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Age Proof</strong>
-                                            <p>Birth Certificate, Matriculation (10th) Certificate, or Passport.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-address-card"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Identity Proof</strong>
-                                            <p>Aadhar Card, PAN Card, or Voter ID.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-map"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Address Proof</strong>
-                                            <p>Electricity Bill, Rent Agreement, Voter ID, or Passport.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-image"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Passport Size Photos</strong>
-                                            <p>6 recent color photographs of both the Bride and Groom.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-solid fa-file-signature"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Affidavit</strong>
-                                            <p>Affidavit detailing age, marital status, and consent (we will draft this).</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Document Interactive Category Tabs -->
+                <div class="doc-filter-tabs">
+                    <button class="doc-tab active" data-tab="coupleDocs"><i class="fa-solid fa-user-group"></i> Bride &amp; Groom (5 Items)</button>
+                    <button class="doc-tab" data-tab="witnessDocs"><i class="fa-solid fa-users"></i> 3 Witnesses</button>
+                    <button class="doc-tab" data-tab="specialDocs"><i class="fa-solid fa-file-shield"></i> Divorced / Widowed / NRI</button>
+                </div>
 
-                        <!-- Column 2: Witnesses & Special cases -->
-                        <div class="doc-column" data-animate="fade-left">
-                            <div class="doc-box">
-                                <h3 class="doc-box-title"><i class="fa-solid fa-users-rectangle"></i> Witness & Special Case Documents</h3>
-                                <ul class="doc-list">
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-solid fa-users"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Three Witnesses</strong>
-                                            <p>Any 3 adults (friends, relatives, neighbors) with valid ID and Address proof.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-address-card"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Witness ID Proof</strong>
-                                            <p>Aadhar Card, PAN Card, Passport, or Driving License of all witnesses.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-regular fa-image"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Witness Photos</strong>
-                                            <p>2 passport-size photographs of each witness.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="doc-icon"><i class="fa-solid fa-file-circle-exclamation"></i></span>
-                                        <div class="doc-info">
-                                            <strong>Divorce / Death Certificate (If Applicable)</strong>
-                                            <p>Certified copy of Divorce Decree if divorced, or Spouse's Death Certificate if widowed.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                <!-- Tab 1 Pane: Bride & Groom -->
+                <div class="doc-tab-pane active" id="coupleDocs">
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                            <h4>1. Age Proof</h4>
                         </div>
+                        <p>10th Admit Card / Birth Certificate / Passport / PAN Card.</p>
+                        <span class="doc-item-note">Original + 2 Xerox Copies</span>
                     </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-regular fa-address-card"></i></div>
+                            <h4>2. Identity Proof</h4>
+                        </div>
+                        <p>Aadhaar Card, Voter ID, or Valid Indian Passport.</p>
+                        <span class="doc-item-note">Must contain correct name</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <h4>3. Address Proof</h4>
+                        </div>
+                        <p>Aadhaar Card, Voter ID, Rent Agreement, or Utility Bill.</p>
+                        <span class="doc-item-note">Local Guwahati or Assam address</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-regular fa-image"></i></div>
+                            <h4>4. Passport Photos</h4>
+                        </div>
+                        <p>6 recent passport-size color photographs of Bride and Groom.</p>
+                        <span class="doc-item-note">White background preferred</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-file-signature"></i></div>
+                            <h4>5. Legal Affidavit</h4>
+                        </div>
+                        <p>Affidavit declaring age, marital status &amp; non-prohibited relation.</p>
+                        <span class="doc-item-note">We draft &amp; notarize this!</span>
+                    </div>
+                </div>
+
+                <!-- Tab 2 Pane: Witnesses -->
+                <div class="doc-tab-pane" id="witnessDocs">
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-users"></i></div>
+                            <h4>1. Three Adult Witnesses</h4>
+                        </div>
+                        <p>Any 3 adults above 18 years of age (friends, relatives, or neighbors).</p>
+                        <span class="doc-item-note">Must be physically present in court</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-regular fa-id-card"></i></div>
+                            <h4>2. Witness ID Proof</h4>
+                        </div>
+                        <p>Aadhaar Card, Voter ID, or PAN Card copy of all 3 witnesses.</p>
+                        <span class="doc-item-note">1 Xerox copy per witness</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-regular fa-image"></i></div>
+                            <h4>3. Witness Photos</h4>
+                        </div>
+                        <p>2 passport-size photographs of each of the 3 witnesses.</p>
+                        <span class="doc-item-note">Recent color photos</span>
+                    </div>
+                </div>
+
+                <!-- Tab 3 Pane: Special Cases -->
+                <div class="doc-tab-pane" id="specialDocs">
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-gavel"></i></div>
+                            <h4>If Divorced</h4>
+                        </div>
+                        <p>Certified copy of the official Divorce Decree granted by court.</p>
+                        <span class="doc-item-note">Final court order copy</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-heart-crack"></i></div>
+                            <h4>If Widowed</h4>
+                        </div>
+                        <p>Government issued Death Certificate of the deceased spouse.</p>
+                        <span class="doc-item-note">Original verification</span>
+                    </div>
+
+                    <div class="doc-item-card">
+                        <div class="doc-item-header">
+                            <div class="doc-item-icon"><i class="fa-solid fa-passport"></i></div>
+                            <h4>If NRI / Foreigner</h4>
+                        </div>
+                        <p>Valid Visa, Foreign Passport, and NOC from home Embassy.</p>
+                        <span class="doc-item-note">Embassy NOC required</span>
+                    </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 35px;">
+                    <a href="https://wa.me/919871761798?text=Hello,%20please%20send%20me%20the%20complete%20Document%20Checklist%20for%20Court%20Marriage." target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> Get Complete Checklist on WhatsApp</a>
                 </div>
             </div>
         </section>
 
-        <!-- Section 7: How It Works (Timeline) -->
+        <!-- Section 7: Interactive How It Works Stepper Wizard -->
         <section class="timeline-section" id="process">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="sub-title">Step-by-Step Procedure</span>
                     <h2 class="section-title">How the Court Marriage Process Works</h2>
-                    <p class="section-desc">We follow a structured legal process to register and solemnize your marriage smoothly.</p>
+                    <p class="section-desc">Tap any step below to explore the simple 5-step legal process.</p>
                 </div>
 
-                <div class="timeline">
-                    <!-- Step 1 -->
-                    <div class="timeline-item" data-animate="fade-up">
-                        <div class="timeline-dot">1</div>
-                        <div class="timeline-content">
-                            <h3>Initial Contact & Consultation</h3>
-                            <p>Free review to check legal eligibility and select the correct marriage act registration route.</p>
-                        </div>
+                <div class="process-wizard-wrapper">
+                    <!-- Interactive Stepper Navigation Bar -->
+                    <div class="process-stepper-bar">
+                        <button class="process-step-btn active" data-step="1">
+                            <span class="step-num-dot">1</span>
+                            <span class="step-btn-label">Consultation</span>
+                        </button>
+                        <button class="process-step-btn" data-step="2">
+                            <span class="step-num-dot">2</span>
+                            <span class="step-btn-label">Affidavits</span>
+                        </button>
+                        <button class="process-step-btn" data-step="3">
+                            <span class="step-num-dot">3</span>
+                            <span class="step-btn-label">30-Day Notice</span>
+                        </button>
+                        <button class="process-step-btn" data-step="4">
+                            <span class="step-num-dot">4</span>
+                            <span class="step-btn-label">Court Visit</span>
+                        </button>
+                        <button class="process-step-btn" data-step="5">
+                            <span class="step-num-dot">5</span>
+                            <span class="step-btn-label">Certificate</span>
+                        </button>
                     </div>
-                    <!-- Step 2 -->
-                    <div class="timeline-item" data-animate="fade-up">
-                        <div class="timeline-dot">2</div>
-                        <div class="timeline-content">
-                            <h3>Document Verification & Drafting</h3>
-                            <p>Verification of ID/address credentials and drafting of stamp paper affidavits and notices.</p>
+
+                    <!-- Step Cards Container -->
+                    <div class="process-cards-container">
+                        <!-- Step 1 Card -->
+                        <div class="process-step-card active" id="stepCard1">
+                            <div class="step-card-header">
+                                <h3>Step 1: Free Consultation &amp; Document Review</h3>
+                                <span class="step-time-badge"><i class="fa-solid fa-clock"></i> Timeline: Day 1</span>
+                            </div>
+                            <p>Meet Advocate Khusboo Verma or consult online. We verify your age/ID documents and select the fastest legal marriage route (Special Marriage Act or Hindu Marriage Act).</p>
+                            <div class="step-key-points">
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Free eligibility assessment</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Complete document check</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Transparent fee guidance</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> 100% privacy assured</div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="timeline-item" data-animate="fade-up">
-                        <div class="timeline-dot">3</div>
-                        <div class="timeline-content">
-                            <h3>Filing Application / Notice</h3>
-                            <p>Submission of intended marriage documents to the Guwahati Registrar Office (30-day notice period).</p>
+
+                        <!-- Step 2 Card -->
+                        <div class="process-step-card" id="stepCard2">
+                            <div class="step-card-header">
+                                <h3>Step 2: Affidavit Drafting &amp; Application Prep</h3>
+                                <span class="step-time-badge"><i class="fa-solid fa-clock"></i> Timeline: Day 2 - 3</span>
+                            </div>
+                            <p>Our legal team drafts your official stamp-paper affidavits, prepares the marriage registration notice forms, and compiles all witness documents.</p>
+                            <div class="step-key-points">
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Stamp paper affidavit drafting</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Official notary attestation</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Error-free form preparation</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Witness documentation</div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="timeline-item" data-animate="fade-up">
-                        <div class="timeline-dot">4</div>
-                        <div class="timeline-content">
-                            <h3>Court Appearance</h3>
-                            <p>Appearance of both partners and 3 adult witnesses before the Registrar to sign official records.</p>
+
+                        <!-- Step 3 Card -->
+                        <div class="process-step-card" id="stepCard3">
+                            <div class="step-card-header">
+                                <h3>Step 3: Filing Application at Marriage Office</h3>
+                                <span class="step-time-badge"><i class="fa-solid fa-clock"></i> Timeline: Day 4</span>
+                            </div>
+                            <p>We submit your marriage application notice to the Guwahati Marriage Registrar. Under the Special Marriage Act, a mandatory 30-day notice period begins.</p>
+                            <div class="step-key-points">
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Application submission by advocate</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Official filing receipt issued</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Statutory 30-day notice period</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Pre-booked court date</div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Step 5 -->
-                    <div class="timeline-item" data-animate="fade-up">
-                        <div class="timeline-dot">5</div>
-                        <div class="timeline-content">
-                            <h3>Marriage Certificate Issuance</h3>
-                            <p>Immediate issuance of the legally registered court marriage certificate valid globally.</p>
+
+                        <!-- Step 4 Card -->
+                        <div class="process-step-card" id="stepCard4">
+                            <div class="step-card-header">
+                                <h3>Step 4: Court Appearance with 3 Witnesses</h3>
+                                <span class="step-time-badge"><i class="fa-solid fa-clock"></i> Timeline: Day 35</span>
+                            </div>
+                            <p>On your scheduled court date, the Bride, Groom, and 3 adult witnesses appear before the Marriage Officer in Guwahati to sign the official register.</p>
+                            <div class="step-key-points">
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Guided appearance by advocate</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> 3 Witnesses sign in presence</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Quick 20-minute procedure</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Zero hassle in court</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 Card -->
+                        <div class="process-step-card" id="stepCard5">
+                            <div class="step-card-header">
+                                <h3>Step 5: Official Marriage Certificate Issued!</h3>
+                                <span class="step-time-badge"><i class="fa-solid fa-clock"></i> Timeline: Same Day</span>
+                            </div>
+                            <p>The Marriage Officer issues your legally registered Court Marriage Certificate. Valid across India, for passport updates, visa processing, and global proof.</p>
+                            <div class="step-key-points">
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Government registered certificate</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Globally valid proof</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Passport &amp; Visa ready</div>
+                                <div class="key-point-item"><i class="fa-solid fa-check-circle"></i> Lifetime legal security</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="text-center" style="margin-top: 45px;">
-                    <a href="court-marriage-process.html" class="btn btn-secondary">Detailed Step-by-Step Procedure <i class="fa-solid fa-arrow-right"></i></a>
+
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="court-marriage-process.html" class="btn btn-secondary">Detailed Legal Procedure Guide <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>

@@ -116,6 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 15. Interactive Gallery & Lightbox
     initInteractiveGallery();
+
+    // 16. Interactive Eligibility Quiz, Doc Tabs & Process Stepper
+    initInteractiveComponents();
 });
 
 /* ==========================================================================
@@ -1139,3 +1142,67 @@ function initInteractiveGallery() {
     // Initial render
     renderGallery();
 }
+
+/* ==========================================================================
+   16. INTERACTIVE ELIGIBILITY QUIZ & DOCUMENT TABS & PROCESS STEPPER
+   ========================================================================== */
+function initInteractiveComponents() {
+    // 1. Eligibility Quiz
+    const quizForm = document.getElementById('eligibilityQuizForm');
+    const quizResultBox = document.getElementById('quizResultBox');
+    const quizResultText = document.getElementById('quizResultText');
+
+    if (quizForm && quizResultBox && quizResultText) {
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const groomAge = document.getElementById('groomAgeSelect').value;
+            const brideAge = document.getElementById('brideAgeSelect').value;
+            const maritalStatus = document.getElementById('maritalStatusSelect').value;
+
+            if (groomAge === '21+' && brideAge === '18+' && maritalStatus === 'valid') {
+                quizResultBox.className = 'quiz-result-box success';
+                quizResultText.innerHTML = '🎉 <strong>Full Eligibility Confirmed!</strong> Both groom (21+) and bride (18+) meet all statutory requirements for Court Marriage in Guwahati.';
+            } else {
+                quizResultBox.className = 'quiz-result-box error';
+                let reason = [];
+                if (groomAge === 'under21') reason.push('Groom must be 21+ years old');
+                if (brideAge === 'under18') reason.push('Bride must be 18+ years old');
+                if (maritalStatus === 'invalid') reason.push('Legally valid divorce decree or unmarried status required');
+                quizResultText.innerHTML = '⚠️ <strong>Notice:</strong> ' + reason.join(', ') + '. Contact Advocate Khusboo Verma for guidance.';
+            }
+        });
+    }
+
+    // 2. Document Category Tabs
+    const docTabs = document.querySelectorAll('.doc-tab');
+    const docPanes = document.querySelectorAll('.doc-tab-pane');
+
+    docTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetId = tab.getAttribute('data-tab');
+            docTabs.forEach(t => t.classList.remove('active'));
+            docPanes.forEach(p => p.classList.remove('active'));
+
+            tab.classList.add('active');
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) targetPane.classList.add('active');
+        });
+    });
+
+    // 3. Process Stepper Wizard
+    const stepBtns = document.querySelectorAll('.process-step-btn');
+    const stepCards = document.querySelectorAll('.process-step-card');
+
+    stepBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const stepNum = btn.getAttribute('data-step');
+            stepBtns.forEach(b => b.classList.remove('active'));
+            stepCards.forEach(c => c.classList.remove('active'));
+
+            btn.classList.add('active');
+            const targetCard = document.getElementById(`stepCard${stepNum}`);
+            if (targetCard) targetCard.classList.add('active');
+        });
+    });
+}
+
