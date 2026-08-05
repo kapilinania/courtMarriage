@@ -119,6 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 16. Interactive Eligibility Quiz, Doc Tabs & Process Stepper
     initInteractiveComponents();
+
+    // 17. Hero Client Photo Showcase Slider
+    initHeroSlider();
+
+    // 18. Google Review Lightbox Modal
+    initGoogleReviewModal();
 });
 
 /* ==========================================================================
@@ -217,9 +223,9 @@ function initStatCounters() {
 
         if (count < target) {
             counter.innerText = Math.ceil(count + increment);
-            setTimeout(() => startCount(counter), 10);
+            setTimeout(() => startCount(counter), 15);
         } else {
-            counter.innerText = target + '+';
+            counter.innerText = target;
         }
     };
 
@@ -482,18 +488,61 @@ function openServiceDetail(serviceKey) {
    8. VIEWPORT SCROLL ANIMATIONS (INTERSECTION OBSERVER)
    ========================================================================== */
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('[data-animate]');
+    // Selectors to automatically auto-animate across every single page
+    const selectorsToAnimate = [
+        '.section-header',
+        '.section-title',
+        '.sub-title',
+        '.service-card',
+        '.feature-card',
+        '.court-card-item',
+        '.doc-item-card',
+        '.process-step-card',
+        '.faq-item',
+        '.gallery-item',
+        '.pricing-card',
+        '.contact-card-item',
+        '.location-card-info',
+        '.location-map-frame',
+        '.cta-banner-container',
+        '.hero-content',
+        '.hero-slider-wrapper',
+        '.eligibility-quiz-wrapper',
+        '.profile-left-col',
+        '.profile-right-col',
+        '.guideline-card',
+        '.trust-card',
+        '.step-card'
+    ];
+
+    selectorsToAnimate.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((el, index) => {
+            if (!el.hasAttribute('data-animate') && !el.classList.contains('reveal-on-scroll')) {
+                el.classList.add('reveal-on-scroll');
+                el.setAttribute('data-animate', 'fade-up');
+                
+                // Add staggered animation delays for cards in grids
+                if (index > 0 && index < 10) {
+                    el.style.transitionDelay = `${(index % 4) * 0.12}s`;
+                }
+            }
+        });
+    });
+
+    const animatedElements = document.querySelectorAll('[data-animate], .reveal-on-scroll');
 
     const animationOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px"
     };
 
     const animationObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
-                observer.unobserve(entry.target); // Trigger once
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
             }
         });
     }, animationOptions);
@@ -1205,4 +1254,222 @@ function initInteractiveComponents() {
         });
     });
 }
+
+/* ==========================================================================
+   17. HERO CLIENT PHOTO SHOWCASE SLIDER
+   ========================================================================== */
+function initHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-slider-dots .dot');
+    const prevBtn = document.getElementById('heroSliderPrev');
+    const nextBtn = document.getElementById('heroSliderNext');
+    const sliderWrapper = document.getElementById('heroClientSlider');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let autoplayTimer = null;
+
+    function goToSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex].classList.add('active');
+        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(nextSlide, 3800);
+    }
+
+    function stopAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+            goToSlide(idx);
+            startAutoplay();
+        });
+    });
+
+    if (sliderWrapper) {
+        sliderWrapper.addEventListener('mouseenter', stopAutoplay);
+        sliderWrapper.addEventListener('mouseleave', startAutoplay);
+
+        // Touch Swipe Support
+        let startX = 0;
+        sliderWrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        sliderWrapper.addEventListener('touchend', e => {
+            let diffX = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diffX) > 40) {
+                if (diffX > 0) nextSlide();
+                else prevSlide();
+                startAutoplay();
+            }
+        }, { passive: true });
+    }
+
+    startAutoplay();
+}
+
+/* ==========================================================================
+   18. GOOGLE REVIEWS LIGHTBOX MODAL HANDLER
+   ========================================================================== */
+function initGoogleReviewModal() {
+    const modal = document.getElementById('googleReviewModal');
+    const closeBtn = document.getElementById('closeGoogleReviewModal');
+    const reviewCards = document.querySelectorAll('.open-review-modal-btn');
+
+    if (!modal) return;
+
+    const modalAvatar = document.getElementById('modalReviewerAvatar');
+    const modalName = document.getElementById('modalReviewerName');
+    const modalMeta = document.getElementById('modalReviewerMeta');
+    const modalTime = document.getElementById('modalReviewTime');
+    const modalText = document.getElementById('modalReviewText');
+
+    function openModal(card) {
+        const reviewer = card.getAttribute('data-reviewer') || 'Verified Client';
+        const photo = card.getAttribute('data-photo');
+        const initial = card.getAttribute('data-initial') || reviewer.charAt(0);
+        const location = card.getAttribute('data-location') || 'Guwahati';
+        const time = card.getAttribute('data-time') || 'Recently';
+        const text = card.getAttribute('data-text') || '';
+
+        const currentAvatar = document.getElementById('modalReviewerAvatar');
+        if (currentAvatar) {
+            if (photo) {
+                currentAvatar.outerHTML = `<img src="${photo}" alt="${reviewer}" class="reviewer-avatar-img" id="modalReviewerAvatar">`;
+            } else {
+                currentAvatar.outerHTML = `<div class="reviewer-avatar-circle" id="modalReviewerAvatar">${initial}</div>`;
+            }
+        }
+
+        if (modalName) modalName.innerHTML = `${reviewer} <i class="fa-solid fa-circle-check" style="color: #4285f4; font-size: 14px;"></i>`;
+        if (modalMeta) modalMeta.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${location} • Verified Google Maps Client`;
+        if (modalTime) modalTime.innerText = time;
+        if (modalText) modalText.innerText = `"${text}"`;
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    reviewCards.forEach(card => {
+        card.addEventListener('click', () => openModal(card));
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
+        }
+    });
+
+    // Also initialize mobile review gallery slider
+    initMobileReviewSlider();
+}
+
+/* ==========================================================================
+   19. MOBILE-ONLY 1-CARD-AT-A-TIME REVIEW GALLERY SLIDER
+   ========================================================================== */
+function initMobileReviewSlider() {
+    const track = document.getElementById('mobileReviewSliderTrack');
+    const prevBtn = document.getElementById('mobileReviewPrev');
+    const nextBtn = document.getElementById('mobileReviewNext');
+    const dotsContainer = document.getElementById('mobileReviewDots');
+
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.mobile-review-slide-card');
+    if (cards.length === 0) return;
+
+    let currentIndex = 0;
+
+    // Create pagination dots
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.className = `mobile-slider-dot ${idx === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => scrollToSlide(idx));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots(index) {
+        if (!dotsContainer) return;
+        const dots = dotsContainer.querySelectorAll('.mobile-slider-dot');
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function scrollToSlide(index) {
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+        currentIndex = index;
+
+        const cardWidth = cards[0].offsetWidth + 16;
+        track.scrollTo({
+            left: currentIndex * cardWidth,
+            behavior: 'smooth'
+        });
+        updateDots(currentIndex);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => scrollToSlide(currentIndex - 1));
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => scrollToSlide(currentIndex + 1));
+    }
+
+    track.addEventListener('scroll', () => {
+        const cardWidth = cards[0].offsetWidth + 16;
+        if (cardWidth <= 0) return;
+        const newIndex = Math.round(track.scrollLeft / cardWidth);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cards.length) {
+            currentIndex = newIndex;
+            updateDots(currentIndex);
+        }
+    }, { passive: true });
+
+    // Optional auto slide every 5 seconds on mobile
+    let autoSlideTimer = setInterval(() => {
+        if (window.innerWidth <= 768) {
+            scrollToSlide(currentIndex + 1);
+        }
+    }, 5000);
+
+    track.addEventListener('touchstart', () => clearInterval(autoSlideTimer), { passive: true });
+}
+
 
