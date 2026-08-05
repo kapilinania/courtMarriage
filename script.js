@@ -418,14 +418,28 @@ function saveLeadLocally(leadData) {
 function initModals() {
     // Consultation Modal
     const consultModal = document.getElementById('consultationModal');
-    const openConsultBtn = document.getElementById('openConsultationModal');
     const closeConsultBtn = document.getElementById('closeConsultationModal');
     const consultOverlay = document.getElementById('modalOverlay');
 
-    if (openConsultBtn && consultModal) {
-        openConsultBtn.addEventListener('click', () => openModal(consultModal));
-        closeConsultBtn.addEventListener('click', () => closeModal(consultModal));
-        consultOverlay.addEventListener('click', () => closeModal(consultModal));
+    if (consultModal) {
+        // Bind ALL consultation open triggers across the site
+        const triggers = document.querySelectorAll('#openConsultationModal, .download-modal-trigger, .open-consult-modal, .consult-btn, .btn-consultation');
+        triggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // If not form download button, open consultation modal
+                if (!btn.classList.contains('download-modal-trigger')) {
+                    e.preventDefault();
+                    openModal(consultModal);
+                }
+            });
+        });
+
+        if (closeConsultBtn) {
+            closeConsultBtn.addEventListener('click', () => closeModal(consultModal));
+        }
+        if (consultOverlay) {
+            consultOverlay.addEventListener('click', () => closeModal(consultModal));
+        }
     }
 
     // Service Detail Modal
@@ -434,19 +448,41 @@ function initModals() {
     const serviceOverlay = document.getElementById('serviceDetailOverlay');
 
     if (serviceModal) {
-        closeServiceBtn.addEventListener('click', () => closeModal(serviceModal));
-        serviceOverlay.addEventListener('click', () => closeModal(serviceModal));
+        if (closeServiceBtn) closeServiceBtn.addEventListener('click', () => closeModal(serviceModal));
+        if (serviceOverlay) serviceOverlay.addEventListener('click', () => closeModal(serviceModal));
     }
+
+    // Global listener for ALL modal close buttons, overlays, and Escape key
+    document.querySelectorAll('.modal-close, .modal-overlay, #cancelDownloadFormsModal').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const modal = this.closest('.modal');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal.open').forEach(m => closeModal(m));
+            document.body.style.overflow = '';
+        }
+    });
 }
 
 function openModal(modalEl) {
+    if (!modalEl) return;
     modalEl.classList.add('open');
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal(modalEl) {
+    if (!modalEl) return;
     modalEl.classList.remove('open');
-    document.body.style.overflow = 'auto';
+    // Ensure body scroll is ALWAYS restored when no open modal remains
+    const remainingOpen = document.querySelectorAll('.modal.open');
+    if (remainingOpen.length === 0) {
+        document.body.style.overflow = '';
+    }
 }
 
 // Function triggered via HTML Service Cards

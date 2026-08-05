@@ -157,20 +157,16 @@
 
         grid.innerHTML = filteredImages.map((img, index) => `
             <div class="gallery-card cloudinary-card" data-index="${index}" data-category="${img.category}" style="animation: galleryCardIn 0.4s ease ${(index % 8) * 0.06}s both;">
+                <span class="gallery-pill-badge">${(catLabelMap[img.category] || img.category).toUpperCase()}</span>
                 <img src="${img.thumb}" alt="${img.title}" loading="lazy" decoding="async"
                      onerror="this.onerror=null;this.src='images/gallery_1.jpg'">
                 ${img.source === 'cloudinary' && GALLERY_CONFIG.showBadge ?
                     `<span class="cloudinary-badge"><i class="fa-solid fa-cloud"></i>Cloud</span>` : ''}
                 <div class="gallery-card-overlay">
-                    <div>
-                        <span class="gallery-card-category">${catLabelMap[img.category] || img.category}</span>
-                        <h3 class="gallery-card-title">${img.title}</h3>
+                    <div class="gallery-zoom-trigger" title="Click to view full image">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                     </div>
-                    <div class="gallery-card-actions">
-                        <button class="gallery-card-action-btn view-btn" aria-label="View fullsize">
-                            <i class="fa-solid fa-expand"></i>
-                        </button>
-                    </div>
+                    <div class="gallery-card-title-banner">${img.title}</div>
                 </div>
             </div>
         `).join('');
@@ -278,7 +274,7 @@
 
         // Touch/swipe support
         let touchStartX = 0;
-        const lbContent = document.querySelector('.lightbox-content');
+        const lbContent = document.querySelector('.lightbox-card-dialog');
         if (lbContent) {
             lbContent.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
             lbContent.addEventListener('touchend', e => {

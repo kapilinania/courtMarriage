@@ -224,27 +224,27 @@
     <!-- Fullscreen Interactive Lightbox Modal -->
     <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
         <div class="lightbox-overlay" id="lightboxOverlay"></div>
-        <div class="lightbox-content">
-            <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <button class="lightbox-arrow lightbox-arrow-prev" id="lightboxPrevBtn" aria-label="Previous Image">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="lightbox-body">
-                <div class="lightbox-img-wrapper">
-                    <img src="" alt="" id="lightboxImg" class="lightbox-img">
-                </div>
-                <div class="lightbox-caption-box">
-                    <span class="lightbox-category" id="lightboxCategory">Category</span>
-                    <h3 id="lightboxTitle" class="lightbox-title">Image Title</h3>
-                    <p id="lightboxCaption" class="lightbox-caption">Description caption goes here.</p>
-                    <span class="lightbox-counter" id="lightboxCounter">1 / 12</span>
+        <div class="lightbox-card-dialog">
+            <div class="lightbox-media-col">
+                <button class="lightbox-close-circle" id="lightboxClose" aria-label="Close Lightbox">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <button class="lightbox-arrow lightbox-arrow-prev" id="lightboxPrevBtn" aria-label="Previous Image">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-arrow lightbox-arrow-next" id="lightboxNextBtn" aria-label="Next Image">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <img src="" alt="" id="lightboxImg" class="lightbox-img">
+            </div>
+            <div class="lightbox-info-col">
+                <div class="lightbox-info-main">
+                    <span class="lightbox-category" id="lightboxCategory">COURT MARRIAGE</span>
+                    <h3 id="lightboxTitle" class="lightbox-title">Registration Desk Solemnization</h3>
+                    <p id="lightboxCaption" class="lightbox-caption">Couples signing official court marriage register in Guwahati advocate chamber.</p>
+                    <div class="lightbox-counter" id="lightboxCounter">1 / 12</div>
                 </div>
             </div>
-            <button class="lightbox-arrow lightbox-arrow-next" id="lightboxNextBtn" aria-label="Next Image">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
         </div>
     </div>
 
