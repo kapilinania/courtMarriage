@@ -3683,14 +3683,14 @@ img {
     top: 0;
     left: 0;
     width: 100%;
-    height: 34px;
+    height: 26px;
     background: linear-gradient(90deg, #072558 0%, #0b3d91 50%, #072558 100%);
     color: #ffffff;
     z-index: 105;
     display: flex;
     align-items: center;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 11.5px;
     font-weight: 600;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(214, 175, 55, 0.3);
@@ -3703,12 +3703,13 @@ img {
 .ticker-title {
     background-color: #d6af37;
     color: #072558;
-    padding: 0 16px;
+    padding: 0 10px;
     height: 100%;
     display: flex;
     align-items: center;
     position: relative;
     z-index: 2;
+    font-size: 10.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -3719,7 +3720,7 @@ img {
     display: inline-block;
     white-space: nowrap;
     padding-left: 100%;
-    animation: ticker-slide 25s linear infinite;
+    animation: ticker-slide 12s linear infinite;
 }
 
 @keyframes ticker-slide {
@@ -3733,37 +3734,37 @@ img {
 
 .ticker-text {
     display: inline-block;
-    padding-right: 50px;
+    padding-right: 35px;
 }
 
 /* Adjust sticky header position down for ticker */
 .main-header {
-    top: 34px;
+    top: 26px;
 }
 
 body {
-    padding-top: 34px;
+    padding-top: 26px;
 }
 
 /* Ticker responsiveness */
 @media (max-width: 640px) {
     .ticker-bar {
-        height: 30px;
-        font-size: 12px;
+        height: 24px;
+        font-size: 10.5px;
     }
 
     .ticker-title {
-        padding: 0 10px;
-        font-size: 11px;
+        padding: 0 8px;
+        font-size: 9.5px;
         letter-spacing: 0;
     }
 
     .main-header {
-        top: 30px;
+        top: 24px;
     }
 
     body {
-        padding-top: 30px;
+        padding-top: 24px;
     }
 }
 
@@ -5766,5 +5767,246 @@ html, body {
     }
 }
 
+/* ==========================================================================
+   DOCUMENT CHECKLIST RESPONSIVE CARDS & DOWNLOAD BUTTONS
+   ========================================================================== */
+.legal-card {
+    background: #ffffff;
+    border-left: 4px solid var(--primary-dark, #0b3d91);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+}
 
+.legal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
+}
 
+.legal-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+}
+
+.legal-card-title {
+    color: #0b3d91;
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.legal-card-title i {
+    color: #d6af37;
+    font-size: 1.2rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.legal-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+.badge-mandatory {
+    background: rgba(11, 61, 145, 0.09);
+    color: #0b3d91;
+    border: 1px solid rgba(11, 61, 145, 0.18);
+}
+
+.badge-special {
+    background: rgba(214, 175, 55, 0.18);
+    color: #854d0e;
+    border: 1px solid rgba(214, 175, 55, 0.35);
+}
+
+.badge-foreign {
+    background: rgba(2, 132, 199, 0.12);
+    color: #0369a1;
+    border: 1px solid rgba(2, 132, 199, 0.25);
+}
+
+.badge-optional {
+    background: rgba(22, 163, 74, 0.12);
+    color: #15803d;
+    border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.legal-card-body {
+    color: #475569;
+    font-size: 14.5px;
+    line-height: 1.7;
+}
+
+.legal-card-body p {
+    margin: 0 0 10px 0;
+}
+
+.legal-card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-card-footer {
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px dashed #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-card-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #0b3d91 0%, #1e40af 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 13.5px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 10px rgba(11, 61, 145, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-card-download:hover {
+    background: linear-gradient(135deg, #072558 0%, #0b3d91 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(11, 61, 145, 0.3);
+    color: #ffffff !important;
+}
+
+.btn-card-download i {
+    color: #d6af37;
+    font-size: 15px;
+}
+
+.btn-card-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f1f5f9;
+    color: #334155 !important;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-card-secondary:hover {
+    background: #e2e8f0;
+    color: #0f172a !important;
+}
+
+@media (max-width: 768px) {
+    .quick-nav-bar {
+        flex-direction: column;
+        align-items: stretch !important;
+        padding: 16px !important;
+    }
+
+    .quick-nav-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .quick-nav-btns .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .legal-card {
+        padding: 18px 16px;
+        margin-bottom: 18px;
+        border-radius: 14px;
+        gap: 12px;
+    }
+    
+    .legal-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .legal-card-badge {
+        align-self: flex-start;
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+    
+    .legal-card-title {
+        font-size: 1.1rem;
+        line-height: 1.35;
+    }
+
+    .legal-card-title i {
+        font-size: 1.1rem;
+    }
+
+    .legal-card-body {
+        font-size: 13.5px;
+    }
+
+    .legal-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btn-card-download,
+    .btn-card-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 13.5px;
+    }
+
+    .cta-banner-card {
+        padding: 22px 18px !important;
+        border-radius: 16px !important;
+    }
+
+    .cta-banner-card h3 {
+        font-size: 18px !important;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+    }
+
+    .cta-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -263,11 +263,11 @@
             <div class="container">
                 
                 <!-- Quick Navigation Bar -->
-                <div style="background: #ffffff; padding: 20px 24px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin-bottom: 40px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                <div class="quick-nav-bar" style="background: #ffffff; padding: 20px 24px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin-bottom: 30px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
                     <div>
                         <strong style="color: #0b3d91; font-size: 16px;"><i class="fa-solid fa-compass"></i> Related Legal Guides:</strong>
                     </div>
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <div class="quick-nav-btns" style="display: flex; gap: 12px; flex-wrap: wrap;">
                         <a href="court-marriage-process.html" class="btn btn-sm btn-outline" style="border-color: #0b3d91; color: #0b3d91; font-weight: 600;">
                             <i class="fa-solid fa-list-check"></i> Step-by-Step Process & Fees
                         </a>
@@ -275,7 +275,7 @@
                             <i class="fa-solid fa-user-check"></i> Eligibility Criteria
                         </a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-primary download-modal-trigger">
-                            <i class="fa-solid fa-download"></i> Download Checklist PDF
+                            <i class="fa-solid fa-download"></i> Download Form Checklist
                         </a>
                     </div>
                 </div>
@@ -283,92 +283,176 @@
                 <div class="content-grid">
                     <div class="main-content-col">
                         
-                        <div style="background: #ffffff; padding: 28px; border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; margin-bottom: 30px;">
-                            <p style="font-size: 16px; color: #334155; line-height: 1.7; margin: 0;">
+                        <div style="background: #ffffff; padding: 24px 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; margin-bottom: 24px;">
+                            <p style="font-size: 15.5px; color: #334155; line-height: 1.7; margin: 0;">
                                 Following is the official list of documents to be presented with the court marriage application to the <strong>Marriage Registrar in Guwahati</strong> for court marriage in Guwahati by the couple under the <strong>Special Marriage Act, 1954</strong>:
                             </p>
                         </div>
 
                         <!-- Document Item 1 -->
-                        <div class="legal-card" style="border-left: 4px solid #0b3d91; position: relative;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(11, 61, 145, 0.1); color: #0b3d91; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Mandatory 01</span>
-                            <h2><i class="fa-solid fa-handshake-angle" style="color: #d6af37;"></i> 1. Non-Prohibited Blood Relationship Declaration</h2>
-                            <p>An official affidavit and declaration confirming that the bride and bridegroom are <strong>not within the prohibited degrees of relationship</strong> as defined under the Special Marriage Act, 1954 (unless permitted by established custom).</p>
+                        <div class="legal-card" style="border-left: 4px solid #0b3d91;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-handshake-angle"></i> 1. Non-Prohibited Blood Relationship Declaration</h2>
+                                <span class="legal-card-badge badge-mandatory">Mandatory 01</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>An official affidavit and declaration confirming that the bride and bridegroom are <strong>not within the prohibited degrees of relationship</strong> as defined under the Special Marriage Act, 1954 (unless permitted by established custom).</p>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Schedule_III_Declaration_Form.pdf" download="Schedule_III_Declaration_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Declaration Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Document Item 2 -->
-                        <div class="legal-card" style="border-left: 4px solid #0b3d91; position: relative;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(11, 61, 145, 0.1); color: #0b3d91; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Mandatory 02</span>
-                            <h2><i class="fa-solid fa-file-signature" style="color: #d6af37;"></i> 2. Signed Intended Marriage Notice</h2>
-                            <p>A formal copy of the <strong>Notice of Intended Marriage</strong> duly signed by both parties (bride &amp; groom), prepared according to the Second Schedule of the Special Marriage Act and submitted to the Marriage Officer in Guwahati.</p>
+                        <div class="legal-card" style="border-left: 4px solid #0b3d91;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-file-signature"></i> 2. Signed Intended Marriage Notice</h2>
+                                <span class="legal-card-badge badge-mandatory">Mandatory 02</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>A formal copy of the <strong>Notice of Intended Marriage</strong> duly signed by both parties (bride &amp; groom), prepared according to the Second Schedule of the Special Marriage Act and submitted to the Marriage Officer in Guwahati.</p>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Notice_of_Intended_Marriage.pdf" download="Notice_of_Intended_Marriage.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Notice Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Document Item 3 -->
-                        <div class="legal-card" style="border-left: 4px solid #0b3d91; position: relative;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(11, 61, 145, 0.1); color: #0b3d91; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Mandatory 03</span>
-                            <h2><i class="fa-solid fa-address-card" style="color: #d6af37;"></i> 3. Proof of Residence (Bride &amp; Groom)</h2>
-                            <p>Valid proof of residence establishing that at least one of the parties has been ordinarily residing in Guwahati for at least 30 days prior to notice filing. Acceptable documents include:</p>
-                            <ul style="margin-top: 10px; padding-left: 20px; color: #475569; font-size: 14px; line-height: 1.8;">
-                                <li>Passport (Current Address)</li>
-                                <li>Voter ID Card (Election Commission)</li>
-                                <li>Driving Licence</li>
-                                <li>Aadhaar Card / Utility Bill / Bank Passbook (Guwahati jurisdiction)</li>
-                            </ul>
+                        <div class="legal-card" style="border-left: 4px solid #0b3d91;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-address-card"></i> 3. Proof of Residence (Bride &amp; Groom)</h2>
+                                <span class="legal-card-badge badge-mandatory">Mandatory 03</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>Valid proof of residence establishing that at least one of the parties has been ordinarily residing in Guwahati for at least 30 days prior to notice filing. Acceptable documents include:</p>
+                                <ul style="margin-top: 10px; padding-left: 20px; color: #475569; font-size: 14px; line-height: 1.8;">
+                                    <li>Passport (Current Address)</li>
+                                    <li>Voter ID Card (Election Commission)</li>
+                                    <li>Driving Licence</li>
+                                    <li>Aadhaar Card / Utility Bill / Bank Passbook (Guwahati jurisdiction)</li>
+                                </ul>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Application Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Document Item 4 -->
-                        <div class="legal-card" style="border-left: 4px solid #0b3d91; position: relative;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(11, 61, 145, 0.1); color: #0b3d91; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Mandatory 04</span>
-                            <h2><i class="fa-solid fa-cake-candles" style="color: #d6af37;"></i> 4. Proof of Age (Bride 18+ &amp; Groom 21+)</h2>
-                            <p>Official government document verifying legal age eligibility (Male ≥ 21 Years, Female ≥ 18 Years):</p>
-                            <ul style="margin-top: 10px; padding-left: 20px; color: #475569; font-size: 14px; line-height: 1.8;">
-                                <li>High School (H.S.LC / Class X) Admit Card or Pass Certificate</li>
-                                <li>Official Birth Certificate issued by Municipal Corporation / Authority</li>
-                                <li>Valid Indian Passport</li>
-                            </ul>
+                        <div class="legal-card" style="border-left: 4px solid #0b3d91;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-cake-candles"></i> 4. Proof of Age (Bride 18+ &amp; Groom 21+)</h2>
+                                <span class="legal-card-badge badge-mandatory">Mandatory 04</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>Official government document verifying legal age eligibility (Male ≥ 21 Years, Female ≥ 18 Years):</p>
+                                <ul style="margin-top: 10px; padding-left: 20px; color: #475569; font-size: 14px; line-height: 1.8;">
+                                    <li>High School (H.S.LC / Class X) Admit Card or Pass Certificate</li>
+                                    <li>Official Birth Certificate issued by Municipal Corporation / Authority</li>
+                                    <li>Valid Indian Passport</li>
+                                </ul>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Application Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Document Item 5 -->
-                        <div class="legal-card" style="border-left: 4px solid #d6af37; position: relative; background: #fffdf5;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(214, 175, 55, 0.2); color: #854d0e; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Special Case 05</span>
-                            <h2><i class="fa-solid fa-file-contract" style="color: #d6af37;"></i> 5. Documents for Divorced / Widowed Spouse</h2>
-                            <p>If either party was previously married, valid legal proof of dissolution of previous marriage must be produced:</p>
-                            <div style="background: #ffffff; padding: 14px 18px; border-radius: 12px; border: 1px solid #fef08a; margin-top: 10px;">
-                                <p style="margin: 0; font-size: 14px; color: #1e293b;">
-                                    <strong>a. For Divorced Spouse:</strong> Certified copy of final <strong>Divorce Decree</strong> issued by Family Court / District Court.<br>
-                                    <strong>b. For Widowed Spouse:</strong> Official <strong>Death Certificate</strong> of the deceased spouse.
-                                </p>
+                        <div class="legal-card" style="border-left: 4px solid #d6af37; background: #fffdf5;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> 5. Documents for Divorced / Widowed Spouse</h2>
+                                <span class="legal-card-badge badge-special">Special Case 05</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>If either party was previously married, valid legal proof of dissolution of previous marriage must be produced:</p>
+                                <div style="background: #ffffff; padding: 14px 18px; border-radius: 12px; border: 1px solid #fef08a; margin-top: 10px;">
+                                    <p style="margin: 0; font-size: 14px; color: #1e293b;">
+                                        <strong>a. For Divorced Spouse:</strong> Certified copy of final <strong>Divorce Decree</strong> issued by Family Court / District Court.<br>
+                                        <strong>b. For Widowed Spouse:</strong> Official <strong>Death Certificate</strong> of the deceased spouse.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Affidavit & Registration Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
                             </div>
                         </div>
 
                         <!-- Document Item 6 -->
-                        <div class="legal-card" style="border-left: 4px solid #0284c7; position: relative; background: #f0f9ff;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(2, 132, 199, 0.15); color: #0369a1; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Special Case 06</span>
-                            <h2><i class="fa-solid fa-passport" style="color: #0284c7;"></i> 6. Documents Required if Party is Foreign National</h2>
-                            <p>For court marriage in Guwahati involving an NRI or Foreign National spouse:</p>
-                            <div style="background: #ffffff; padding: 14px 18px; border-radius: 12px; border: 1px solid #bae6fd; margin-top: 10px;">
-                                <p style="margin: 0; font-size: 14px; color: #0c4a6e;">
-                                    <strong>a. Single Status Certificate / No Objection Certificate (NOC):</strong> Issued by the Embassy / High Commission / Consulate of their respective Country.<br>
-                                    <strong>b. Valid Passport &amp; Visa / OCI Card:</strong> Proof of legal stay in India.
-                                </p>
+                        <div class="legal-card" style="border-left: 4px solid #0284c7; background: #f0f9ff;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-passport" style="color: #0284c7;"></i> 6. Documents Required if Party is Foreign National</h2>
+                                <span class="legal-card-badge badge-foreign">Special Case 06</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>For court marriage in Guwahati involving an NRI or Foreign National spouse:</p>
+                                <div style="background: #ffffff; padding: 14px 18px; border-radius: 12px; border: 1px solid #bae6fd; margin-top: 10px;">
+                                    <p style="margin: 0; font-size: 14px; color: #0c4a6e;">
+                                        <strong>a. Single Status Certificate / No Objection Certificate (NOC):</strong> Issued by the Embassy / High Commission / Consulate of their respective Country.<br>
+                                        <strong>b. Valid Passport &amp; Visa / OCI Card:</strong> Proof of legal stay in India.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Foreign National Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
                             </div>
                         </div>
 
                         <!-- Document Item 7 -->
-                        <div class="legal-card" style="border-left: 4px solid #16a34a; position: relative; background: #f0fdf4;">
-                            <span style="position: absolute; top: 20px; right: 20px; background: rgba(22, 163, 74, 0.15); color: #15803d; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 20px;">Optional 07</span>
-                            <h2><i class="fa-solid fa-heart" style="color: #16a34a;"></i> 7. Post-Social Marriage Registration Documents</h2>
-                            <p>If the couple is registering their marriage <strong>after a social / religious wedding ceremony</strong> (under personal laws or Section 16 of Special Marriage Act):</p>
-                            <p style="margin-top: 8px; font-size: 14px; color: #166534;">
-                                • Marriage invitation card, temple/religious certificate, or photographs of the wedding ceremony establishing social marriage.
-                            </p>
+                        <div class="legal-card" style="border-left: 4px solid #16a34a; background: #f0fdf4;">
+                            <div class="legal-card-header">
+                                <h2 class="legal-card-title"><i class="fa-solid fa-heart" style="color: #16a34a;"></i> 7. Post-Social Marriage Registration Documents</h2>
+                                <span class="legal-card-badge badge-optional">Optional 07</span>
+                            </div>
+                            <div class="legal-card-body">
+                                <p>If the couple is registering their marriage <strong>after a social / religious wedding ceremony</strong> (under personal laws or Section 16 of Special Marriage Act):</p>
+                                <p style="margin-top: 8px; font-size: 14px; color: #166534;">
+                                    • Marriage invitation card, temple/religious certificate, or photographs of the wedding ceremony establishing social marriage.
+                                </p>
+                            </div>
+                            <div class="legal-card-footer">
+                                <a href="forms/Marriage_Application_Form.pdf" download="Marriage_Application_Form.pdf" target="_blank" class="btn-card-download">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Registration Form (PDF)
+                                </a>
+                                <a href="javascript:void(0);" class="btn-card-secondary download-modal-trigger">
+                                    <i class="fa-solid fa-folder-open"></i> View All Forms
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Call-to-Action Card -->
-                        <div style="background: linear-gradient(135deg, #0b3d91 0%, #1e40af 100%); padding: 32px; border-radius: 24px; color: #ffffff; margin-top: 40px; box-shadow: 0 10px 30px rgba(11, 61, 145, 0.25);">
+                        <div class="cta-banner-card" style="background: linear-gradient(135deg, #0b3d91 0%, #1e40af 100%); padding: 32px; border-radius: 24px; color: #ffffff; margin-top: 30px; box-shadow: 0 10px 30px rgba(11, 61, 145, 0.25);">
                             <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #ffffff;">Need Assistance Verifying Your Documents?</h3>
                             <p style="font-size: 15px; color: #e2e8f0; margin-bottom: 20px; line-height: 1.6;">Avoid RTPS application rejections or notice delays. Advocate Khusboo Verma provides complete pre-filing document verification and affidavit drafting in Guwahati.</p>
-                            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                            <div class="cta-actions" style="display: flex; gap: 14px; flex-wrap: wrap;">
                                 <a href="tel:+919871761798" class="btn btn-gold" style="padding: 12px 24px; font-weight: 700;">
                                     <i class="fa-solid fa-phone"></i> Call +91 98717 61798
                                 </a>
