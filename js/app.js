@@ -195,17 +195,19 @@ function initMobileDrawer() {
    ========================================================================== */
 function initActiveLinkHighlighter() {
     const navLinks = document.querySelectorAll('.nav-link, .drawer-link');
-    const currentPath = window.location.pathname;
-    const pageName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
 
     navLinks.forEach(link => {
-        link.classList.remove('active');
         const href = link.getAttribute('href');
-        
-        if (pageName === href || (pageName === '' && href === 'index.html')) {
-            link.classList.add('active');
-        } else if (pageName === 'index.html' && href === 'index.html') {
-            link.classList.add('active');
+        if (!href || href === 'javascript:void(0);') return;
+
+        try {
+            const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+            if (currentPath === linkPath) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            // Ignore invalid URLs
         }
     });
 }
