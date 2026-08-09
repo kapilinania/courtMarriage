@@ -1,0 +1,23 @@
+# ==========================================================================
+# COURT MARRIAGE GUWAHATI - SERVER CONFIGURATION (.htaccess)
+# ==========================================================================
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# 1. Custom Error Pages
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+ErrorDocument 403 /403.html
+
+# 2. Clean URLs (Serve folder index or extensionless URLs)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# 3. Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
