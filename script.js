@@ -943,6 +943,31 @@ function initInteractiveGallery() {
 
     if (!galleryTrack && !galleryPageGridTrack) return;
 
+    // Helper to resolve image paths based on subfolder depth
+    function resolveScriptImgPath(path) {
+        if (!path || path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+            return path;
+        }
+        const isSubfolder = window.location.pathname.includes('/gallery/') ||
+                            window.location.pathname.includes('/services/') ||
+                            window.location.pathname.includes('/about-advocate/') ||
+                            window.location.pathname.includes('/contact/') ||
+                            window.location.pathname.includes('/court-marriage-') ||
+                            window.location.pathname.includes('/inter-caste-') ||
+                            window.location.pathname.includes('/tatkal-') ||
+                            window.location.pathname.includes('/marriage-certificate/') ||
+                            window.location.pathname.includes('/admin/') ||
+                            window.location.pathname.includes('/faq/') ||
+                            window.location.pathname.includes('/forms/') ||
+                            window.location.pathname.includes('/disclaimer/') ||
+                            window.location.pathname.includes('/privacy-policy/') ||
+                            window.location.pathname.includes('/terms-of-service/');
+        if (isSubfolder && path.startsWith('images/')) {
+            return '../' + path;
+        }
+        return path;
+    }
+
     // Gallery Data Source (easily updateable array)
     const galleryData = [
         { id: 1, title: "Registration Desk Solemnization", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_1.jpg", caption: "Couples signing official court marriage register in Guwahati advocate chamber." },
@@ -984,7 +1009,7 @@ function initInteractiveGallery() {
             galleryTrack.innerHTML = visibleItems.map((item, idx) => `
                 <div class="gallery-card" data-index="${idx}" data-id="${item.id}">
                     <div class="gallery-img-box">
-                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        <img src="${resolveScriptImgPath(item.image)}" alt="${item.title}" loading="lazy">
                         <div class="gallery-overlay">
                             <div class="gallery-zoom-icon">
                                 <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -1023,7 +1048,7 @@ function initInteractiveGallery() {
         if (galleryPageGridTrack) {
             galleryPageGridTrack.innerHTML = filteredItems.map((item, idx) => `
                 <div class="gallery-grid-item" data-index="${idx}">
-                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    <img src="${resolveScriptImgPath(item.image)}" alt="${item.title}" loading="lazy">
                     <div class="gallery-grid-overlay">
                         <span class="gallery-grid-badge">${item.categoryLabel}</span>
                         <div class="gallery-grid-zoom">
@@ -1195,7 +1220,7 @@ function initInteractiveGallery() {
         const item = filteredItems[activeLightboxIndex];
         if (!item) return;
 
-        lightboxImg.src = item.image;
+        lightboxImg.src = resolveScriptImgPath(item.image);
         lightboxImg.alt = item.title;
         lightboxTitle.textContent = item.title;
         lightboxCategory.textContent = item.categoryLabel;

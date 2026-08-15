@@ -17,20 +17,32 @@
         showBadge: true,
     };
 
+    // ── Helper to resolve local image URLs relative to /gallery/ page ──────────
+    function resolveUrl(url) {
+        if (!url) return '../images/gallery_1.jpg';
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+            return url;
+        }
+        if (url.startsWith('images/')) {
+            return '../' + url;
+        }
+        return url;
+    }
+
     // ── Static fallback images (used if Cloudinary is not configured) ─────────
     const LOCAL_IMAGES = [
-        { id: 'local_1', url: 'images/gallery_1.jpg', thumb: 'images/gallery_1.jpg', title: 'Court Marriage Ceremony', category: 'court', caption: 'Official court marriage solemnization under the Special Marriage Act.', source: 'local' },
-        { id: 'local_2', url: 'images/gallery_2.jpg', thumb: 'images/gallery_2.jpg', title: 'Marriage Registration Certificate', category: 'registration', caption: 'Legally registered marriage certificate issued by the registrar office.', source: 'local' },
-        { id: 'local_3', url: 'images/gallery_3.jpg', thumb: 'images/gallery_3.jpg', title: 'Traditional Ceremony', category: 'ceremonies', caption: 'Traditional wedding ceremony documentation and registration.', source: 'local' },
-        { id: 'local_4', url: 'images/gallery_4.jpg', thumb: 'images/gallery_4.jpg', title: 'Advocate Chamber Consultation', category: 'chamber', caption: 'Legal consultation session at Advocate Khusboo Verma\'s office.', source: 'local' },
-        { id: 'local_5', url: 'images/gallery_5.jpg', thumb: 'images/gallery_5.jpg', title: 'Hindu Marriage Registration', category: 'registration', caption: 'Hindu Marriage Act registration ceremony completed.', source: 'local' },
-        { id: 'local_6', url: 'images/gallery_6.jpg', thumb: 'images/gallery_6.jpg', title: 'Court Marriage Solemnization', category: 'court', caption: 'Marriage solemnized under the courts of Guwahati.', source: 'local' },
-        { id: 'local_7', url: 'images/gallery_7.jpg', thumb: 'images/gallery_7.jpg', title: 'Couple Registration', category: 'couples', caption: 'Happy couple after successful marriage registration.', source: 'local' },
-        { id: 'local_8', url: 'images/gallery_8.jpg', thumb: 'images/gallery_8.jpg', title: 'Office Ceremony', category: 'chamber', caption: 'Legal marriage process completed at our Athgaon office.', source: 'local' },
-        { id: 'local_9', url: 'images/gallery_9.jpg', thumb: 'images/gallery_9.jpg', title: 'Inter-Faith Marriage', category: 'court', caption: 'Inter-faith marriage legally registered under the Special Marriage Act.', source: 'local' },
-        { id: 'local_10', url: 'images/gallery_10.jpg', thumb: 'images/gallery_10.jpg', title: 'Certificate Collection', category: 'registration', caption: 'Official marriage certificates collected after registration.', source: 'local' },
-        { id: 'local_11', url: 'images/gallery_11.jpg', thumb: 'images/gallery_11.jpg', title: 'Wedding Ceremony', category: 'ceremonies', caption: 'Complete wedding ceremony documentation in Guwahati.', source: 'local' },
-        { id: 'local_12', url: 'images/gallery_12.jpg', thumb: 'images/gallery_12.jpg', title: 'Legal Consultation', category: 'chamber', caption: 'Expert legal guidance for marriage registration procedures.', source: 'local' },
+        { id: 'local_1', url: '../images/gallery_1.jpg', thumb: '../images/gallery_1.jpg', title: 'Court Marriage Ceremony', category: 'court', caption: 'Official court marriage solemnization under the Special Marriage Act.', source: 'local' },
+        { id: 'local_2', url: '../images/gallery_2.jpg', thumb: '../images/gallery_2.jpg', title: 'Marriage Registration Certificate', category: 'registration', caption: 'Legally registered marriage certificate issued by the registrar office.', source: 'local' },
+        { id: 'local_3', url: '../images/gallery_3.jpg', thumb: '../images/gallery_3.jpg', title: 'Traditional Ceremony', category: 'ceremonies', caption: 'Traditional wedding ceremony documentation and registration.', source: 'local' },
+        { id: 'local_4', url: '../images/gallery_4.jpg', thumb: '../images/gallery_4.jpg', title: 'Advocate Chamber Consultation', category: 'chamber', caption: 'Legal consultation session at Advocate Khusboo Verma\'s office.', source: 'local' },
+        { id: 'local_5', url: '../images/gallery_5.jpg', thumb: '../images/gallery_5.jpg', title: 'Hindu Marriage Registration', category: 'registration', caption: 'Hindu Marriage Act registration ceremony completed.', source: 'local' },
+        { id: 'local_6', url: '../images/gallery_6.jpg', thumb: '../images/gallery_6.jpg', title: 'Court Marriage Solemnization', category: 'court', caption: 'Marriage solemnized under the courts of Guwahati.', source: 'local' },
+        { id: 'local_7', url: '../images/gallery_7.jpg', thumb: '../images/gallery_7.jpg', title: 'Couple Registration', category: 'couples', caption: 'Happy couple after successful marriage registration.', source: 'local' },
+        { id: 'local_8', url: '../images/gallery_8.jpg', thumb: '../images/gallery_8.jpg', title: 'Office Ceremony', category: 'chamber', caption: 'Legal marriage process completed at our Athgaon office.', source: 'local' },
+        { id: 'local_9', url: '../images/gallery_9.jpg', thumb: '../images/gallery_9.jpg', title: 'Inter-Faith Marriage', category: 'court', caption: 'Inter-faith marriage legally registered under the Special Marriage Act.', source: 'local' },
+        { id: 'local_10', url: '../images/gallery_10.jpg', thumb: '../images/gallery_10.jpg', title: 'Certificate Collection', category: 'registration', caption: 'Official marriage certificates collected after registration.', source: 'local' },
+        { id: 'local_11', url: '../images/gallery_11.jpg', thumb: '../images/gallery_11.jpg', title: 'Wedding Ceremony', category: 'ceremonies', caption: 'Complete wedding ceremony documentation in Guwahati.', source: 'local' },
+        { id: 'local_12', url: '../images/gallery_12.jpg', thumb: '../images/gallery_12.jpg', title: 'Legal Consultation', category: 'chamber', caption: 'Expert legal guidance for marriage registration procedures.', source: 'local' },
     ];
 
     // ── State ────────────────────────────────────────────────────────────────
@@ -158,8 +170,8 @@
         grid.innerHTML = filteredImages.map((img, index) => `
             <div class="gallery-card cloudinary-card" data-index="${index}" data-category="${img.category}" style="animation: galleryCardIn 0.4s ease ${(index % 8) * 0.06}s both;">
                 <span class="gallery-pill-badge">${(catLabelMap[img.category] || img.category).toUpperCase()}</span>
-                <img src="${img.thumb}" alt="${img.title}" loading="lazy" decoding="async"
-                     onerror="this.onerror=null;this.src='images/gallery_1.jpg'">
+                <img src="${resolveUrl(img.thumb)}" alt="${img.title}" loading="lazy" decoding="async"
+                     onerror="this.onerror=null;this.src='../images/gallery_1.jpg'">
                 ${img.source === 'cloudinary' && GALLERY_CONFIG.showBadge ?
                     `<span class="cloudinary-badge"><i class="fa-solid fa-cloud"></i>Cloud</span>` : ''}
                 <div class="gallery-card-overlay">
@@ -229,7 +241,7 @@
 
         if (lbImg) {
             lbImg.style.opacity = '0';
-            lbImg.src = img.url;
+            lbImg.src = resolveUrl(img.url);
             lbImg.alt = img.title;
             lbImg.onload = () => { lbImg.style.opacity = '1'; };
         }
