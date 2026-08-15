@@ -3750,6 +3750,35 @@ img {
     padding: 0 15px;
 }
 
+.ticker-bar:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+.ticker-content {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    height: 100%;
+    padding-left: 100%;
+    animation: ticker-slide 20s linear infinite;
+}
+
+@keyframes ticker-slide {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.ticker-text {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    padding-right: 35px;
+    line-height: 28px;
+}
+
 /* Adjust sticky header position down for ticker */
 .main-header {
     top: 28px;
