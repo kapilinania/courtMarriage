@@ -1,6 +1,36 @@
+# Advanced Robots.txt for Court Marriage Guwahati
+# https://www.courtmarriageguwahati.com
+
 User-agent: *
 Allow: /
-Disallow: /scratch/
-Disallow: /.*
+Disallow: /admin/
+Disallow: /403/
+Disallow: /404/
+Disallow: /500/
+Disallow: /403.html
+Disallow: /404.html
+Disallow: /500.html
 
+# Fast indexing crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+# Social media link preview bots
+User-agent: WhatsApp
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Sitemap Index Declarations
 Sitemap: https://www.courtmarriageguwahati.com/sitemap.xml
+Sitemap: https://www.courtmarriageguwahati.com/sitemap/

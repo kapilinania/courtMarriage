@@ -275,8 +275,10 @@ img {
 }
 
 .logo-img {
-    height: 42px;
+    height: 44px;
     width: auto;
+    max-width: 100%;
+    object-fit: contain;
     flex-shrink: 0;
 }
 
@@ -5242,6 +5244,11 @@ body {
     margin-top: 10px;
     width: max-content;
 }
+.legal-card-grid{
+    padding: 15px;
+    padding-top: 25px;
+    
+}
 
 /* Responsive Grid for Practice Cards */
 @media (max-width: 640px) {
@@ -6594,4 +6601,15 @@ table {
         font-size: 22px !important;
     }
 }
+
+/* Responsive Legal Card Grid for Landing Pages */
+@media (max-width: 992px) {
+    .legal-card-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        margin: 20px;
+        padding: 10px;
+    }
+}
+
 

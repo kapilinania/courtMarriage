@@ -1,125 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Home Page -->
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home Page (Primary Landing Page) -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.courtmarriageguwahati.com/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://www.courtmarriageguwahati.com/images/og-share-preview.png</image:loc>
+      <image:title>Court Marriage in Guwahati - Advocate Khusboo Verma</image:title>
+      <image:caption>Official Legal Court Marriage Registration &amp; Advocate Services in Guwahati, Assam</image:caption>
+      <image:geo_location>Guwahati, Assam, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <!-- Tatkal & Urgent Court Marriage Landing Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/tatkal-court-marriage/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/tatkal-court-marriage/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/hero_couple.jpg</image:loc>
-      <image:title>Court Marriage in Guwahati - Legal Registration</image:title>
+      <image:title>Tatkal &amp; Urgent Court Marriage Registration Guwahati</image:title>
+      <image:caption>Fast track court marriage registration and document filing assistance in Guwahati</image:caption>
+      <image:geo_location>Guwahati, Assam, India</image:geo_location>
     </image:image>
   </url>
 
-  <!-- Court Marriage Process & Procedure (New Dedicated Page) -->
+  <!-- Marriage Certificate RTPS Landing Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/marriage-certificate/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/marriage-certificate/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://www.courtmarriageguwahati.com/images/marriage_certificate.jpg</image:loc>
+      <image:title>Official Marriage Certificate Download RTPS Assam</image:title>
+      <image:caption>Government of Assam e-District RTPS Marriage Registration Certificate guidance</image:caption>
+      <image:geo_location>Guwahati, Assam, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <!-- Inter-Caste & Inter-Religion Court Marriage Landing Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/inter-caste-court-marriage/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/inter-caste-court-marriage/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://www.courtmarriageguwahati.com/images/hero_couple.jpg</image:loc>
+      <image:title>Inter-Caste &amp; Inter-Religion Court Marriage Lawyer Guwahati</image:title>
+      <image:caption>Confidential legal protection under Special Marriage Act 1954 in Guwahati</image:caption>
+      <image:geo_location>Guwahati, Assam, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <!-- Court Marriage Process & Procedure Guide -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/court-marriage-process/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/court-marriage-process/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/marriage_certificate.jpg</image:loc>
-      <image:title>Process of Court Marriage in Guwahati - 10 Step Guide &amp; RTPS Fees</image:title>
+      <image:title>Step-by-Step Court Marriage Procedure &amp; Fees Guwahati</image:title>
+      <image:caption>Detailed 10-step legal process for court marriage registration in Guwahati</image:caption>
     </image:image>
   </url>
 
-  <!-- Documents Required Page (New Dedicated Page) -->
+  <!-- Documents Required Page -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/court-marriage-documents/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/court-marriage-documents/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/marriage_certificate.jpg</image:loc>
-      <image:title>Documents Required for Court Marriage Registration in Guwahati</image:title>
+      <image:title>Court Marriage Documents Checklist Guwahati</image:title>
+      <image:caption>Complete list of age, identity, address proof and witness requirements</image:caption>
     </image:image>
   </url>
 
-  <!-- Eligibility Rules Page (New Dedicated Page) -->
+  <!-- Eligibility Rules Page -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/court-marriage-eligibility/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/court-marriage-eligibility/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/hero_couple.jpg</image:loc>
       <image:title>Legal Eligibility Criteria for Court Marriage in Guwahati</image:title>
+      <image:caption>Age, martial status, prohibited degree rules under Special Marriage Act</image:caption>
     </image:image>
+  </url>
+
+  <!-- Matrimonial Services Catalog Page -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/services/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/services/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
 
   <!-- About Advocate Khusboo Verma -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/about-advocate/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/about-advocate/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.90</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/advocate_portrait.jpg</image:loc>
-      <image:title>Advocate Khusboo Verma Gauhati High Court Lawyer</image:title>
+      <image:title>Advocate Khusboo Verma - Gauhati High Court Lawyer</image:title>
+      <image:caption>Senior court marriage advocate with 10+ years practice in Guwahati</image:caption>
     </image:image>
   </url>
 
-  <!-- Services Page -->
+  <!-- Contact & Office Chamber Location -->
   <url>
-    <loc>https://www.courtmarriageguwahati.com/services/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <loc>https://www.courtmarriageguwahati.com/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/contact/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- FAQ Knowledge Base Center -->
+  <url>
+    <loc>https://www.courtmarriageguwahati.com/faq/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/faq/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
 
   <!-- Client Marriage Gallery -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/gallery/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/gallery/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
     <image:image>
       <image:loc>https://www.courtmarriageguwahati.com/images/gallery_1.jpg</image:loc>
-      <image:title>Court Marriage Registration Photo Gallery Guwahati</image:title>
+      <image:title>Court Marriage Registration Client Photo Gallery Guwahati</image:title>
     </image:image>
   </url>
 
-  <!-- FAQ Knowledge Center -->
+  <!-- HTML Visual Sitemap Directory Page -->
   <url>
-    <loc>https://www.courtmarriageguwahati.com/faq/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <loc>https://www.courtmarriageguwahati.com/sitemap/</loc>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.courtmarriageguwahati.com/sitemap/"/>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Contact Us & Location -->
-  <url>
-    <loc>https://www.courtmarriageguwahati.com/contact/</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.75</priority>
   </url>
 
   <!-- Privacy Policy -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/privacy-policy/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.50</priority>
   </url>
 
   <!-- Terms of Service -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/terms-of-service/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.50</priority>
   </url>
 
   <!-- Legal Disclaimer -->
   <url>
     <loc>https://www.courtmarriageguwahati.com/disclaimer/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-15T12:00:00+05:30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.50</priority>
   </url>
 
 </urlset>
