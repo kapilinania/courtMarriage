@@ -285,8 +285,34 @@ function initFaqAccordion() {
 /* ==========================================================================
    6. FORMS HANDLING (INQUIRY & APPOINTMENT MODAL)
    ========================================================================== */
+/* ==========================================================================
+   GOOGLE SHEETS INTEGRATION CONFIGURATION
+   Replace the URL below with your deployed Google Apps Script Web App URL
+   ========================================================================== */
+const GOOGLE_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxepVTE_aCdT1-DLaCg-37kxreV3pktaus9OLXvRl7wQwcwfKzdsfc3XEO13pr3yLX6/exec";
+
+async function sendToGoogleSheets(payload) {
+    if (!GOOGLE_SHEETS_SCRIPT_URL || GOOGLE_SHEETS_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
+        console.log("Google Sheets Web App URL not set yet. Saved lead locally.");
+        return;
+    }
+    try {
+        await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+        });
+        console.log("Successfully dispatched payload to Google Sheets (Tab: " + payload.sheetName + ")");
+    } catch (error) {
+        console.error("Error dispatching data to Google Sheets:", error);
+    }
+}
+
 function initForms() {
-    // A. Main Contact Form
+    // A. Main Contact Form / Inquiry Form
     const contactForm = document.getElementById('contactForm');
     const formFeedback = document.getElementById('formFeedback');
 
@@ -316,20 +342,31 @@ function initForms() {
                 return;
             }
 
-            // Mock saving to local storage (Google sheets integration prototype)
+            // Determine target sheet tab based on page URL (Contact page vs Index/Service page)
+            const isContactPage = window.location.pathname.includes('/contact') || 
+                                  (document.querySelector('.contact-form-wrapper h3') && 
+                                   document.querySelector('.contact-form-wrapper h3').innerText.includes('Private'));
+            const targetSheetName = isContactPage ? 'Private Legal Inquiry' : 'Legal Inquiry';
+
             const leadData = {
                 leadId: Date.now(),
+                sheetName: targetSheetName,
                 name: userName,
                 phone: userPhone,
                 email: userEmail,
                 service: selectService,
                 preferredDate: preferredDate || 'N/A',
                 message: userMessage || 'N/A',
-                timestamp: new Date().toLocaleString(),
-                status: 'New'
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                status: 'New',
+                pageUrl: window.location.href
             };
 
+            // Save to local storage dashboard
             saveLeadLocally(leadData);
+
+            // Send to Google Sheets Apps Script Web App
+            sendToGoogleSheets(leadData);
 
             // Simulate Network Delay
             setTimeout(() => {
@@ -341,7 +378,7 @@ function initForms() {
         });
     }
 
-    // B. Modal Appointment Form
+    // B. Modal Appointment Form ("Book Free Consultation")
     const modalForm = document.getElementById('modalForm');
     const modalFeedback = document.getElementById('modalFeedback');
 
@@ -369,16 +406,22 @@ function initForms() {
 
             const appointmentData = {
                 leadId: Date.now(),
+                sheetName: 'Consultation',
                 name: name,
                 phone: phone,
                 service: service,
-                preferredDate: date,
+                preferredDate: date || 'N/A',
                 message: 'Consultation Modal Booking',
-                timestamp: new Date().toLocaleString(),
-                status: 'New'
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                status: 'New',
+                pageUrl: window.location.href
             };
 
+            // Save to local storage dashboard
             saveLeadLocally(appointmentData);
+
+            // Send to Google Sheets Apps Script Web App
+            sendToGoogleSheets(appointmentData);
 
             setTimeout(() => {
                 showFeedback(modalFeedback, "Appointment confirmed! We will call you back to lock your time slot.", true);
