@@ -10,12 +10,20 @@ ErrorDocument 404 /404.html
 ErrorDocument 500 /500.html
 ErrorDocument 403 /403.html
 
-# 2. Clean URLs (Serve folder index or extensionless URLs)
+# 2. 301 Permanent Redirects (.html -> /directory/)
+RewriteCond %{THE_REQUEST} \s/([^/]+)\.html[\s?] [NC]
+RewriteCond %{DOCUMENT_ROOT}/%1 -d
+RewriteRule ^([^/]+)\.html$ /%1/ [R=301,L]
+
+# Explicit 301 Redirect for Court Marriage Process
+Redirect 301 /court-marriage-process.html /court-marriage-process/
+
+# 3. Clean URLs (Serve folder index or extensionless URLs)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
-# 3. Security Headers
+# 4. Security Headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
