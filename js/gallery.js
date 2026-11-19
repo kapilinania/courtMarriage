@@ -31,6 +31,8 @@
 
     // ── Static fallback images (used if Cloudinary is not configured) ─────────
     const LOCAL_IMAGES = [
+        { id: 'local_rupam_1', url: '../images/Testimonials1.webp', thumb: '../images/Testimonials1.webp', title: 'Sri Rupam Biswas & Srimati Tanushree Biswas', category: 'court', caption: 'Sri Rupam Biswas and Srimati Tanushree Biswas legally hitched by our team — Lawyer for court marriage in Guwahati.', source: 'local' },
+        { id: 'local_rupam_2', url: '../images/Testimonials2.webp', thumb: '../images/Testimonials2.webp', title: 'Marriage Registration Certificate - Rupam & Tanushree', category: 'registration', caption: 'Official marriage registration certificate issued in Guwahati — Lawyer for marriage registration in Guwahati.', source: 'local' },
         { id: 'local_1', url: '../images/gallery_1.jpg', thumb: '../images/gallery_1.jpg', title: 'Court Marriage Ceremony', category: 'court', caption: 'Official court marriage solemnization under the Special Marriage Act.', source: 'local' },
         { id: 'local_2', url: '../images/gallery_2.jpg', thumb: '../images/gallery_2.jpg', title: 'Marriage Registration Certificate', category: 'registration', caption: 'Legally registered marriage certificate issued by the registrar office.', source: 'local' },
         { id: 'local_3', url: '../images/gallery_3.jpg', thumb: '../images/gallery_3.jpg', title: 'Traditional Ceremony', category: 'ceremonies', caption: 'Traditional wedding ceremony documentation and registration.', source: 'local' },

@@ -126,6 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 18. Google Review Lightbox Modal
     initGoogleReviewModal();
+
+    // 19. Lazy Load Instagram Reels (Fast Load & Autoplay Support)
+    initLazyInstagramReels();
+
+    // 20. Review Dual-Photo Switcher
+    initReviewPhotoSwitcher();
 });
 
 /* ==========================================================================
@@ -1013,18 +1019,20 @@ function initInteractiveGallery() {
 
     // Gallery Data Source (easily updateable array)
     const galleryData = [
-        { id: 1, title: "Registration Desk Solemnization", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_1.jpg", caption: "Couples signing official court marriage register in Guwahati advocate chamber." },
-        { id: 2, title: "Government Marriage Certificate", category: "registration", categoryLabel: "Registration", image: "images/gallery_2.jpg", caption: "Joyful couple holding their legally issued court marriage registration certificate." },
-        { id: 3, title: "Legal Advice Consultation", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_3.jpg", caption: "Advocate Khusboo Verma explaining registration procedures to clients." },
-        { id: 4, title: "Traditional Garland Exchange", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_4.jpg", caption: "Sacred garland exchange ritual before solemnizing marriage registration." },
-        { id: 5, title: "Official Stamp & Document Signing", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_5.jpg", caption: "Handing over wedding rings and signing official government affidavits." },
-        { id: 6, title: "Court Marriage Guwahati Office & Witness Gathering", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_6.jpg", caption: "Happy family and witnesses gathered at Court Marriage Guwahati office." },
-        { id: 7, title: "Traditional Marriage Blessings", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_7.jpg", caption: "Traditional Assamese ritual blessing ceremony for legal marriage." },
-        { id: 8, title: "Official Legal Seal & Agreement", category: "registration", categoryLabel: "Registration", image: "images/gallery_8.jpg", caption: "Official government stamp seal placed on final court marriage registration." },
-        { id: 9, title: "Sacred Vow Rituals", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_9.jpg", caption: "Couples exchanging legal vows and traditional garlands in Guwahati." },
-        { id: 10, title: "Document Review & Drafting", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_10.jpg", caption: "Detailed legal verification of witness IDs and marriage application notices." },
-        { id: 11, title: "Court Appearance & Approval", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_11.jpg", caption: "Couples celebrating successful court appearance and marriage authorization." },
-        { id: 12, title: "Official Registration Seal", category: "registration", categoryLabel: "Registration", image: "images/gallery_12.jpg", caption: "Certified legal registrar seal affixed to government marriage certificate." }
+        { id: 1, title: "Sri Rupam Biswas & Srimati Tanushree Biswas", category: "court", categoryLabel: "Court Marriage", image: "images/Testimonials1.webp", caption: "Sri Rupam Biswas and Srimati Tanushree Biswas legally hitched by our team under Special Marriage Act in Guwahati." },
+        { id: 2, title: "Official Marriage Registration - Rupam & Tanushree", category: "registration", categoryLabel: "Registration", image: "images/Testimonials2.webp", caption: "Government marriage certificate issued for Sri Rupam Biswas & Srimati Tanushree Biswas by Advocate Khusboo Verma." },
+        { id: 3, title: "Registration Desk Solemnization", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_1.jpg", caption: "Couples signing official court marriage register in Guwahati advocate chamber." },
+        { id: 4, title: "Government Marriage Certificate", category: "registration", categoryLabel: "Registration", image: "images/gallery_2.jpg", caption: "Joyful couple holding their legally issued court marriage registration certificate." },
+        { id: 5, title: "Legal Advice Consultation", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_3.jpg", caption: "Advocate Khusboo Verma explaining registration procedures to clients." },
+        { id: 6, title: "Traditional Garland Exchange", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_4.jpg", caption: "Sacred garland exchange ritual before solemnizing marriage registration." },
+        { id: 7, title: "Official Stamp & Document Signing", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_5.jpg", caption: "Handing over wedding rings and signing official government affidavits." },
+        { id: 8, title: "Court Marriage Guwahati Office & Witness Gathering", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_6.jpg", caption: "Happy family and witnesses gathered at Court Marriage Guwahati office." },
+        { id: 9, title: "Traditional Marriage Blessings", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_7.jpg", caption: "Traditional Assamese ritual blessing ceremony for legal marriage." },
+        { id: 10, title: "Official Legal Seal & Agreement", category: "registration", categoryLabel: "Registration", image: "images/gallery_8.jpg", caption: "Official government stamp seal placed on final court marriage registration." },
+        { id: 11, title: "Sacred Vow Rituals", category: "ceremonies", categoryLabel: "Ceremonies", image: "images/gallery_9.jpg", caption: "Couples exchanging legal vows and traditional garlands in Guwahati." },
+        { id: 12, title: "Document Review & Drafting", category: "chamber", categoryLabel: "Chamber & Office", image: "images/gallery_10.jpg", caption: "Detailed legal verification of witness IDs and marriage application notices." },
+        { id: 13, title: "Court Appearance & Approval", category: "court", categoryLabel: "Court Marriage", image: "images/gallery_11.jpg", caption: "Couples celebrating successful court appearance and marriage authorization." },
+        { id: 14, title: "Official Registration Seal", category: "registration", categoryLabel: "Registration", image: "images/gallery_12.jpg", caption: "Certified legal registrar seal affixed to government marriage certificate." }
     ];
 
     let currentFilter = 'all';
@@ -1685,6 +1693,111 @@ function initDownloadFormsModal() {
         }
     });
 }
+
+/* ==========================================================================
+   LAZY LOAD INSTAGRAM REELS (FAST LOAD & AUTOPLAY SUPPORT)
+   ========================================================================== */
+function initLazyInstagramReels() {
+    const containers = document.querySelectorAll('.lazy-reel-container');
+    if (!containers.length) return;
+
+    const loadReel = (container) => {
+        if (container.dataset.loaded === 'true') return;
+        container.dataset.loaded = 'true';
+
+        const iframe = container.querySelector('.lazy-reel-iframe');
+        const skeleton = container.querySelector('.reel-loading-skeleton');
+
+        if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+
+            const hideSkeleton = () => {
+                if (skeleton && skeleton.style.opacity !== '0') {
+                    skeleton.style.opacity = '0';
+                    setTimeout(() => {
+                        skeleton.style.display = 'none';
+                    }, 400);
+                }
+            };
+
+            iframe.addEventListener('load', hideSkeleton);
+            // Fallback timeout in case embed load event doesn't fire cleanly
+            setTimeout(hideSkeleton, 2000);
+        }
+    };
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadReel(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '250px 0px',
+            threshold: 0.01
+        });
+
+        containers.forEach(c => observer.observe(c));
+    } else {
+        containers.forEach(c => loadReel(c));
+    }
+}
+
+/* ==========================================================================
+   20. REVIEW DUAL-PHOTO SWITCHER (TESTIMONIALS INTERACTIVE DISPLAY)
+   ========================================================================== */
+function initReviewPhotoSwitcher() {
+    const photoBoxes = document.querySelectorAll('.review-dual-photo-box');
+    photoBoxes.forEach(box => {
+        const mainImg = box.querySelector('.review-photo-main');
+        const pills = box.querySelectorAll('.photo-switch-pill');
+        const display = box.querySelector('.review-photo-display');
+        const avatarImg = document.getElementById('rupamAvatarImg');
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const newSrc = pill.getAttribute('data-src');
+                if (mainImg && newSrc) {
+                    mainImg.style.opacity = '0.3';
+                    setTimeout(() => {
+                        mainImg.src = newSrc;
+                        mainImg.style.opacity = '1';
+                        if (avatarImg) avatarImg.src = newSrc;
+                    }, 140);
+                }
+            });
+        });
+
+        if (display && mainImg) {
+            display.addEventListener('click', () => {
+                const lightbox = document.getElementById('galleryLightbox');
+                const lightboxImg = document.getElementById('lightboxImg');
+                const lightboxTitle = document.getElementById('lightboxTitle');
+                const lightboxCaption = document.getElementById('lightboxCaption');
+                const activePill = box.querySelector('.photo-switch-pill.active');
+
+                if (lightbox && lightboxImg) {
+                    lightboxImg.src = mainImg.src;
+                    if (lightboxTitle) lightboxTitle.textContent = "Sri Rupam Biswas & Srimati Tanushree Biswas";
+                    if (lightboxCaption) {
+                        lightboxCaption.textContent = activePill ? activePill.getAttribute('data-caption') : "Sri Rupam Biswas and Srimati Tanushree Biswas legally hitched by our team in Guwahati.";
+                    }
+                    lightbox.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        }
+    });
+}
+
+
 
 
 
